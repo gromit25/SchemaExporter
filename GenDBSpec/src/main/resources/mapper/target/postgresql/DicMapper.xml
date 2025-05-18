@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.redeye.dbspec.gen.mapper.DicM">
+
+	<!-- 테이블 정보 추출 -->
+	<select id="selectTables" parameterType="java.lang.String" resultType="TableD">
+		select
+			relname as tableName
+			, description
+		from
+			pg_description
+			join pg_class
+				on pg_description.objoid = pg_class.oid
+		where
+			objsubid = 0
+		<if test="tableNamePrefix != null and tableNamePrefix != ''">
+			and relname like concat(#{tableNamePrefix}, '%')
+		</if>
+		order by relname
+	</select>
+	
+	<!-- 특정 테이블의 컬럼 정보 추출 -->
+	<select id="selectColumns" parameterType="java.lang.String" resultType="ColumnD">
+	<![CDATA[
+		select
+			c.relname as tableName
+			, a.attname as columnName
+		    , t.typname as typeName
+		    , case
+		        when t.typname in ('varchar', 'bpchar') then a.atttypmod - 4
+		        when t.typname = 'numeric' then (a.atttypmod >> 16) & 65535
+		        else null
+		    	end::text as length
+		    , pgd.description
+		from
+		    pg_attribute a
+			join pg_class c
+				on a.attrelid = c.oid
+			join pg_type t
+				on a.atttypid = t.oid
+			left outer join pg_description pgd
+				on a.attrelid = pgd.objoid
+				and a.attnum = pgd.objsubid
+		where
+		    c.relname = #{tableName}
+		    and a.attnum > 0
+		    and not a.attisdropped
+		order by a.attnum
+	]]>
+	</select>
+	
+	<!-- 특정 테이블의 키 정보 추출 -->
+	<select id="selectKeyColumns" parameterType="java.lang.String" resultType="KeyColumnD">
+		select
+			c.relname as tableName
+			, a.attname as columnName
+		    , con.contype as keyType
+		    , rc.relname || '.' || ra.attname as ref
+		from
+		    pg_attribute a
+			join pg_class c
+				on a.attrelid = c.oid
+			join pg_constraint con
+		    	on con.conrelid = c.oid
+		    	and (a.attnum = any(con.conkey))
+			left outer join pg_class rc
+				on con.confrelid = rc.oid
+			left outer join pg_attribute ra
+				on ra.attrelid = rc.oid
+				and ra.attnum = any(con.confkey)
+		where
+		    c.relname = #{tableName}
+		    and a.attnum > 0
+		    and not a.attisdropped
+	</select>
+	
+	<!-- 시퀀스 목록 조회 -->
+	<select id="selectSeq" resultType="SequenceD">
+		select
+			sequence_schema as schemaName
+			, sequence_name as sequenceName
+			, start_value::text as startValue
+			, maximum_value::text as maxValue
+			, increment::text
+			, cycle_option as cycle
+		from
+			information_schema.sequences
+		order by
+			sequence_schema asc
+			, sequence_name asc
+	</select>
+</mapper>
