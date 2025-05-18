@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.redeye.dbspec.target.DicM">
+
+	<!-- 테이블 정보 추출 -->
+	<select id="selectTables" parameterType="java.lang.String" resultType="com.redeye.dbspec.common.dto.TableD">
+		SELECT
+			table_name AS "tableName"
+			, table_comment AS "description"
+		FROM 
+		    information_schema.tables
+		WHERE 
+		    table_schema = #{schemaName};
+	</select>
+	
+	<!-- 특정 테이블의 컬럼 정보 추출 -->
+	<select id="selectColumns" parameterType="java.lang.String" resultType="com.redeye.dbspec.common.dto.ColumnD">
+		SELECT 
+		    cols.table_name AS "tableName"
+		    , cols.column_name AS "columnName"
+		    , cols.data_type AS "type"
+		    , COALESCE(cols.character_maximum_length, cols.numeric_precision) AS "size"
+		    , CASE cols.is_nullable
+				WHEN 'YES' THEN 'T'
+        		ELSE 'F'
+    		  END AS "isNullable"
+		    , cols.column_comment AS "description"
+		FROM 
+		    information_schema.columns cols
+		JOIN 
+		    information_schema.tables tbls
+		    ON cols.table_schema = tbls.table_schema
+		    AND cols.table_name = tbls.table_name
+		WHERE 
+		    cols.table_schema = #{schemaName}
+		    AND cols.table_name = #{tableName}
+		ORDER BY 
+		    cols.table_name, cols.ordinal_position
+	</select>
+	
+	<!-- 특정 테이블의 키 정보 추출 -->
+	<select id="selectKeyColumns" parameterType="java.lang.String" resultType="com.redeye.dbspec.common.dto.KeyColumnD">
+		SELECT 
+		    c.table_name AS "tableName"
+		    , c.column_name AS "columnName"
+		    , CASE 
+		        WHEN tc.constraint_type = 'PRIMARY KEY' THEN 'p'
+		        WHEN tc.constraint_type = 'FOREIGN KEY' THEN 'f'
+		        WHEN tc.constraint_type = 'UNIQUE' THEN 'u'
+		        ELSE NULL
+		      END AS "keyType"
+		    , kcu.referenced_table_name AS "refTableName"
+		    , kcu.referenced_column_name AS "refColumnName"
+		FROM 
+		    information_schema.columns c
+		LEFT JOIN information_schema.key_column_usage kcu 
+		    ON c.table_schema = kcu.table_schema 
+		    AND c.table_name = kcu.table_name 
+		    AND c.column_name = kcu.column_name
+		JOIN information_schema.table_constraints tc 
+		    ON kcu.constraint_name = tc.constraint_name 
+		    AND kcu.table_name = tc.table_name 
+		    AND kcu.table_schema = tc.table_schema
+		WHERE 
+		    c.table_schema = #{schemaName}
+		    AND c.table_name = #{tableName}
+		ORDER BY 
+		    c.table_name, c.ordinal_position
+	</select>
+	
+	<!-- 시퀀스 목록 조회 : MySQL은 AUTO_INCREMENT를 사용 -->
+	<select id="selectSeq" resultType="com.redeye.dbspec.common.dto.SequenceD">
+		SELECT
+		    '' AS "sequenceName"
+		    , 0 AS "startValue"
+		    , 0 AS "maxValue"
+		    , 0 AS "increment"
+		    , 'F' AS "isCycle"
+		where 1=0;
+	</select>
+	
+	<!-- 뷰 목록 조회 -->
+	<resultMap id="ViewMap" type="com.redeye.dbspec.common.dto.ViewD">
+		<result property="viewName" column="table_name"/>
+		<result property="query" column="view_definition" typeHandler="com.redeye.dbspec.common.handler.ViewSqlTypeHandler"/>
+	</resultMap>
+	
+	<select id="selectView" resultMap="ViewMap">
+		SELECT 
+		    table_name
+		    , view_definition
+		FROM 
+		    information_schema.views
+		WHERE 
+		    table_schema = #{schemaName}
+	</select>
+</mapper>

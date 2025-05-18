@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbook template="C:/workspace/GenDBSpec/src/main/resources/template.xlsx">
+
+	<!--  -->
+	<set name="prjName" exp="'EMMA for Tibco'"/>
+	<set name="schemaName" exp="'EMMA4TIBCO'"/>
+	<set name="deptName" exp="'전략솔루션개발팀'"/>
+	<set name="writer" exp="'손정모'"/>
+
+	<!-- 테이블 목록 출력 -->
+	<worksheet name="테이블목록">
+	
+		<!-- 프로젝트 명 출력 -->
+		<cursor position="1:3"/>
+		<cell>|${prjName}</cell>
+	
+		<!-- 테이블 목록 -->
+		<cursor position="4:1"/>
+		
+		<set name="index" exp="0"/>
+		<foreach element="table" list="tableList">
+		
+			<set name="index" exp="index + 1"/>
+		
+			<rowcells>
+				<cell copyFrom="4:1">|${toInt(index)}</cell>
+				<cell copyFrom="4:2">|${schemaName}</cell>
+				<cell copyFrom="4:3">|${table.tableName}</cell>
+				<cell copyFrom="4:4">|${table.description}</cell>
+				<cell copyFrom="4:5">|${today}</cell>
+				<cell copyFrom="4:6">|${writer}</cell>
+			</rowcells>
+			
+		</foreach>
+	</worksheet>
+	
+	<worksheet name="시퀀스목록">
+	
+		<!-- 프로젝트 명 출력 -->
+		<cursor position="1:3"/>
+		<cell>|${prjName}</cell>
+	
+		<!-- 시퀀스 목록 -->
+		<cursor position="4:1"/>
+		
+		<set name="index" exp="0"/>
+		<foreach element="sequence" list="sequenceList">
+		
+			<set name="index" exp="index + 1"/>
+		
+			<rowcells>
+				<cell copyFrom="4:1">|${toInt(index)}</cell>
+				<cell copyFrom="4:2">|${schemaName}</cell>
+				<cell copyFrom="4:3">|${sequence.sequenceName}</cell>
+				<cell copyFrom="4:4">|${sequence.startValue}</cell>
+				<cell copyFrom="4:5">|${sequence.maxValue}</cell>
+				<cell copyFrom="4:6">|${sequence.increment}</cell>
+				<cell copyFrom="4:7">|${sequence.isCycle}</cell>
+				<cell copyFrom="4:8">|</cell>
+				<cell copyFrom="4:9">|${today}</cell>
+				<cell copyFrom="4:10">|${writer}</cell>
+			</rowcells>
+			
+		</foreach>
+	</worksheet>
+	
+	<worksheet name="뷰목록">
+	
+		<!-- 프로젝트 명 출력 -->
+		<cursor position="1:3"/>
+		<cell>|${prjName}</cell>
+	
+		<!-- 시퀀스 목록 -->
+		<cursor position="4:1"/>
+		
+		<set name="index" exp="0"/>
+		<foreach element="view" list="viewList">
+		
+			<set name="index" exp="index + 1"/>
+		
+			<rowcells>
+				<cell copyFrom="4:1">|${toInt(index)}</cell>
+				<cell copyFrom="4:2">|${schemaName}</cell>
+				<cell copyFrom="4:3">|${view.viewName}</cell>
+				<cell copyFrom="4:4">|${view.query}</cell>
+				<cell copyFrom="4:9">|${today}</cell>
+				<cell copyFrom="4:10">|${writer}</cell>
+			</rowcells>
+			
+		</foreach>
+	</worksheet>
+	
+	<!-- 테이블의 컬럼 Worksheet 생성 -->
+	<foreach element="table" list="tableList">
+	
+		<worksheet name="${table.tableName}" copyFrom="columnList">
+
+			<!-- 프로젝트 명 -->
+			<cursor position="1:3"/>
+			<cell>|${prjName}</cell>
+			
+			<!-- 부서명 -->
+			<cursor position="2:3"/>
+			<cell>|${deptName}</cell>
+
+			<!-- 작성자 -->
+			<cursor position="2:5"/>
+			<cell>|${writer}</cell>
+		
+			<!-- 날짜 -->
+			<cursor position="2:9"/>
+			<cell>|${today}</cell>
+		
+			<!-- 테이블 정보 출력 -->
+			<cursor position="3:3"/>
+			<cell>|${table.tableName}</cell>
+			<cell>|${table.description}</cell>
+		
+			<!-- 컬럼 정보 출력 -->
+			<cursor position="8:1"/>
+		
+			<!-- 순번용 인덱스 설정 -->
+			<set name="index" exp="0"/>
+		
+			<!-- 테이블명별 컬럼 정보 설정 -->
+			<set name="columnList" exp="tableColumnMap[table.tableName]"/>
+			
+			<foreach element="column" list="columnList">
+			
+				<set name="index" exp="index + 1"/>
+				
+				<rowcells>
+					<cell copyFrom="8:1">
+						|${toInt(index)}
+					</cell>
+					<cell copyFrom="8:2">
+						|${column.columnName}
+					</cell>
+					<cell copyFrom="8:3">
+						|${column.type}
+					</cell>
+					<cell copyFrom="8:4">
+						|${column.size}
+					</cell>
+					<cell copyFrom="8:5">
+						|${if(column.isPrimaryKey == 'T', 'O', '-')}
+					</cell>
+					<cell copyFrom="8:6">
+						|${if(column.isUnique == 'T', 'O', '-')}
+					</cell>
+					<cell copyFrom="8:7">
+						|${if(column.isNullable == 'F', 'O', '-')}
+					</cell>
+					<cell copyFrom="8:8">
+						|${if(column.isForeignKey == 'T', 'O', '-')}
+					</cell>
+					<cell span=":1" copyFrom="8:9">
+						|${column.refTableName + '.' + column.refColumnName}
+					</cell>
+					<cell copyFrom="8:10"/>
+					<cell span=":6" copyFrom="8:11">
+						|${column.description}
+					</cell>
+					<cell copyFrom="8:12"/>
+					<cell copyFrom="8:13"/>
+					<cell copyFrom="8:14"/>
+					<cell copyFrom="8:15"/>
+					<cell copyFrom="8:16"/>
+					<cell copyFrom="8:17"/>
+				</rowcells>
+				
+			</foreach>
+		</worksheet>
+	</foreach>
+	
+	<!-- 템플릿 시트 삭제 -->
+	<worksheet name="columnList" remove="true"/>
+	
+</workbook>

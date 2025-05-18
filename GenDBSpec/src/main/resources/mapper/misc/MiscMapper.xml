@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.redeye.dbspec.misc.MiscM">
+	
+	<!-- 테이블 업서트 -->
+	<insert id="upsertTableList">
+		MERGE INTO
+			RC_TBL T
+		USING
+			(
+			<foreach collection="tableList" item="table" separator=" UNION ALL ">
+				SELECT
+					SCM_ID
+					, #{table.tableName} AS TBL_NM
+					, #{table.description, jdbcType=VARCHAR} AS DTL_DESC
+				FROM
+					RC_SCM
+				WHERE
+					SCM_NM = #{schemaName}
+			</foreach>
+			) S
+		ON (T.SCM_ID = S.SCM_ID AND T.TBL_NM = S.TBL_NM)
+		WHEN MATCHED THEN 
+		    UPDATE SET T.DTL_DESC = S.DTL_DESC
+		WHEN NOT MATCHED THEN
+		    INSERT (TBL_ID, SCM_ID, TBL_NM, DTL_DESC)
+		    VALUES (SEQ_RC_TBL_ID.NEXTVAL, S.SCM_ID, S.TBL_NM,  S.DTL_DESC)
+	</insert>
+	
+	<!-- 컬럼명 업서트 --> 
+	<insert id="upsertColumnList">
+		MERGE INTO
+			RC_COL C
+		USING
+			(
+			<foreach collection="columnList" item="column" separator=" UNION ALL ">
+				SELECT
+					TBL_ID
+					, #{column.columnName} AS COL_NM
+					, #{column.description, jdbcType=VARCHAR} AS DTL_DESC
+					, #{column.type} AS TP
+					, #{column.size} AS SZ
+					, #{column.isPrimaryKey} AS IS_PK
+					, #{column.isUnique} AS IS_UQ
+					, #{column.isNullable} AS IS_NL
+					, #{column.isForeignKey} AS IS_FK
+					, #{column.refTableName} AS REF_TBL_NM
+					, #{column.refColumnName} AS REF_COL_NM
+				FROM
+					RC_TBL T
+					JOIN RC_SCM S
+						ON T.SCM_ID = S.SCM_ID
+				WHERE
+					S.SCM_NM = #{schemaName}
+					AND T.TBL_NM = #{column.tableName}
+			</foreach>
+			) S
+		ON (C.TBL_ID = S.TBL_ID AND C.COL_NM = S.COL_NM)
+		WHEN MATCHED THEN 
+		    UPDATE SET
+		    	C.DTL_DESC = S.DTL_DESC
+		    	, C.TP = S.TP
+		    	, C.SZ = S.SZ
+		    	, C.IS_PK = S.IS_PK
+		    	, C.IS_UQ = S.IS_UQ
+		    	, C.IS_NL = S.IS_NL
+		    	, C.IS_FK = S.IS_FK
+		    	, C.REF_TBL_NM = S.REF_TBL_NM
+		    	, C.REF_COL_NM = S.REF_COL_NM
+		WHEN NOT MATCHED THEN
+		    INSERT (COL_ID, TBL_ID, COL_NM, DTL_DESC, TP, SZ, IS_PK, IS_UQ, IS_NL, IS_FK, REF_TBL_NM, REF_COL_NM)
+		    VALUES (
+		    	SEQ_RC_COL_ID.NEXTVAL
+		    	, S.TBL_ID
+		    	, S.COL_NM
+		    	, S.DTL_DESC
+		    	, S.TP
+		    	, S.SZ
+		    	, S.IS_PK
+		    	, S.IS_UQ
+		    	, S.IS_NL
+		    	, S.IS_FK
+		    	, S.REF_TBL_NM
+		    	, S.REF_COL_NM
+		    )
+	</insert>
+	
+	<!-- -->
+	<insert id="upsertSequenceList">
+		MERGE INTO
+			RC_SEQ SQ
+		USING
+			(
+			<foreach collection="sequenceList" item="sequence" separator=" UNION ALL ">
+				SELECT
+					SCM_ID
+					, #{sequence.sequenceName} AS SEQ_NM
+					, #{sequence.startValue} AS STRT_VAL
+					, #{sequence.maxValue} AS MAX_VAL
+					, #{sequence.increment} AS INC
+					, #{sequence.isCycle} AS IS_CYCLE
+				FROM
+					RC_SCM
+				WHERE
+					SCM_NM = #{schemaName}
+			</foreach>
+			) S
+		ON (SQ.SCM_ID = S.SCM_ID AND SQ.SEQ_NM = S.SEQ_NM)
+		WHEN MATCHED THEN 
+		    UPDATE SET
+		    	SQ.STRT_VAL = S.STRT_VAL
+		    	, SQ.MAX_VAL = S.MAX_VAL
+		    	, SQ.INC = S.INC
+		    	, SQ.IS_CYCLE = S.IS_CYCLE
+		WHEN NOT MATCHED THEN
+		    INSERT (
+		    	SEQ_ID
+		    	, SCM_ID
+		    	, SEQ_NM
+		    	, STRT_VAL
+		    	, MAX_VAL
+		    	, INC
+		    	, IS_CYCLE
+		    )
+		    VALUES (
+		    	SEQ_RC_SEQ_ID.NEXTVAL
+		    	, S.SCM_ID
+		    	, S.SEQ_NM
+		    	, S.STRT_VAL
+		    	, S.MAX_VAL
+		    	, S.INC
+		    	, S.IS_CYCLE
+		    )
+	</insert>
+	
+	<!-- View 업서트 -->
+	<insert id="upsertViewList">
+		MERGE INTO
+			RC_VIEW V
+		USING
+			(
+			<foreach collection="viewList" item="view" separator=" UNION ALL ">
+				SELECT
+					SCM_ID
+					, #{view.viewName} AS VIEW_NM
+					, #{view.query} AS QUERY
+				FROM
+					RC_SCM
+				WHERE
+					SCM_NM = #{schemaName}
+			</foreach>
+			) S
+		ON (V.SCM_ID = S.SCM_ID AND V.VIEW_NM = S.VIEW_NM)
+		WHEN MATCHED THEN 
+		    UPDATE SET V.QUERY = S.QUERY
+		WHEN NOT MATCHED THEN
+		    INSERT (VIEW_ID, SCM_ID, VIEW_NM, QUERY)
+		    VALUES (SEQ_RC_VIEW_ID.NEXTVAL, S.SCM_ID, S.VIEW_NM, S.QUERY)
+	</insert>
+	
+</mapper>
