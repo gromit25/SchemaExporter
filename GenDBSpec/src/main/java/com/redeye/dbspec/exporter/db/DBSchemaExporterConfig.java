@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import com.jutools.DBDriver;
+
 /**
  * 스키마 저장 데이터베이스 접속 설정 클래스
  * 
@@ -26,9 +28,21 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 )
 public class DBSchemaExporterConfig {
 	
-	/** 접속 드라이버 클래스 명 */
-	@Value("${exporter.db.datasource.driver-class-name}")
-	private String driverClassName;
+	/** db type */
+	@Value("${exporter.db.datasource.type}")
+	private String typeStr;
+	
+	/** host */
+	@Value("${exporter.db.datasource.host}")
+	private String host;
+	
+	/** port */
+	@Value("${exporter.db.datasource.port}")
+	private int port;
+
+	/** database */
+	@Value("${exporter.db.datasource.database}")
+	private String database;
 	
 	/** 접속 URL */
 	@Value("${exporter.db.datasource.url}")
@@ -44,11 +58,13 @@ public class DBSchemaExporterConfig {
 
 	
     @Bean(name = "exporterDataSource")
-    DataSource dataSource() {
+    DataSource dataSource() throws Exception {
+    	
+    	DBDriver driverType = DBDriver.find(this.typeStr);
     	
         return DataSourceBuilder.create()
-	        .driverClassName(this.driverClassName)
-	        .url(this.url)
+	        .driverClassName(driverType.getDriver())
+	        .url(driverType.getUrl(this.host, this.port, this.database))
 	        .username(this.username)
 	        .password(this.password)
 			.build();
@@ -59,7 +75,7 @@ public class DBSchemaExporterConfig {
 
     	// Mapper 자원 로딩
         Resource[] resources = new PathMatchingResourcePatternResolver()
-                .getResources("classpath:mapper/misc/*.xml");
+                .getResources("classpath:mapper/exporter/*.xml");
     	
         // Session Factory 생성 후 반환
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
