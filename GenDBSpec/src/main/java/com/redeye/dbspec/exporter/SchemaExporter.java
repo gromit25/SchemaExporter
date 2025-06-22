@@ -52,7 +52,7 @@ public abstract class SchemaExporter {
 	}
 	
 	/**
-	 * DB의 스키마 정보 반환
+	 * DB의 스키마 정보 추출 및 반환
 	 * 
 	 * @param schemaName 스키마 명
 	 * @return 스키마 정보
