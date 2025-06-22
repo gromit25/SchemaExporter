@@ -15,7 +15,7 @@ import com.redeye.dbspec.exporter.SchemaExporter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 
+ * Database로 Schema를 출력하는 클래스
  * 
  * @author jmsohn
  */
@@ -27,6 +27,7 @@ public class DBSchemaExporter extends SchemaExporter {
 	@Autowired
 	private ExportMapper mapper;
 
+	@Override
 	public void init() throws Exception {
 		// Do nothing
 	}
