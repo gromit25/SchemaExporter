@@ -27,19 +27,19 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 public class DBSchemaExporterConfig {
 	
 	/** 접속 드라이버 클래스 명 */
-	@Value("${spring.datasource.exporter.db.driver-class-name}")
+	@Value("${exporter.db.datasource.driver-class-name}")
 	private String driverClassName;
 	
 	/** 접속 URL */
-	@Value("${spring.datasource.exporter.db.url}")
+	@Value("${exporter.db.datasource.url}")
 	private String url;
 	
 	/** 접속 UserName */
-	@Value("${spring.datasource.exporter.db.username}")
+	@Value("${exporter.db.datasource.username}")
 	private String username;
 	
 	/** 접속 Password */
-	@Value("${spring.datasource.exporter.db.password}")
+	@Value("${exporter.db.datasource.password}")
 	private String password;
 
 	
@@ -47,10 +47,10 @@ public class DBSchemaExporterConfig {
     DataSource dataSource() {
     	
         return DataSourceBuilder.create()
-	        .driverClassName(driverClassName)
-	        .url(url)
-	        .username(username)
-	        .password(password)
+	        .driverClassName(this.driverClassName)
+	        .url(this.url)
+	        .username(this.username)
+	        .password(this.password)
 			.build();
     }
 

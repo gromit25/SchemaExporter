@@ -19,7 +19,7 @@ import com.redeye.dbspec.exporter.xlsx.XlsxSchemaExporter;
 public class SchemaExporterConfig {
 	
 	/** 출력 타입 */
-	@Value("${spring.datasource.exporter.type}")
+	@Value("${exporter.type}")
 	private String exporterType;
 
 	/**

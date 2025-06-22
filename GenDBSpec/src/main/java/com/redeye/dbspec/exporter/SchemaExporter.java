@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.jutools.DateUtil;
 import com.jutools.StringUtil;
@@ -20,9 +21,11 @@ import com.redeye.dbspec.target.DicUtil;
  */
 public abstract class SchemaExporter {
 	
-	/**
-	 * 스키마 정보 추출 서비스
-	 */
+	/** 추출할 스키마 명 */
+	@Value("${target.schema}")
+	private String schemaName;
+	
+	/** 스키마 정보 추출 서비스 */
 	@Autowired
 	private DicS dicSvc;
 	
@@ -41,16 +44,10 @@ public abstract class SchemaExporter {
 	
 	/**
 	 * 스키마 정보를 출력함
-	 * 
-	 * @param schemaName 스키마 명
 	 */
-	public void export(String schemaName) throws Exception {
+	public void export() throws Exception {
 		
-		if(StringUtil.isBlank(schemaName) == true) {
-			throw new IllegalArgumentException("schema name is null or blank.");
-		}
-		
-		Map<String, Object> values = this.getSchemaInfo(schemaName);
+		Map<String, Object> values = this.getSchemaInfo();
 		this.write(values);
 	}
 	
@@ -60,34 +57,38 @@ public abstract class SchemaExporter {
 	 * @param schemaName 스키마 명
 	 * @return 스키마 정보
 	 */
-	private Map<String, Object> getSchemaInfo(String schemaName) throws Exception {
+	private Map<String, Object> getSchemaInfo() throws Exception {
+		
+		if(StringUtil.isBlank(this.schemaName) == true) {
+			throw new IllegalArgumentException("schema name is null or blank.");
+		}
 		
 		// 스키마 정보
 		Map<String, Object> values = new HashMap<>();
 		
 		// 현재 스키마명 설정
-		values.put("schemaName", schemaName);
+		values.put("schemaName", this.schemaName);
 		
 		// 오늘 날짜 설정
 		String today = DateUtil.getDateStr(System.currentTimeMillis(), ".");
 		values.put("today", today);
 		
 		// 테이블 정보 목록 획득 및 설정
-		List<TableD> tableList = this.dicSvc.getTableList(schemaName);
+		List<TableD> tableList = this.dicSvc.getTableList(this.schemaName);
 		values.put("tableList", tableList);
 		
 		// 테이블별 컬럼 정보 목록 획득 및 설정
-		Map<String, List<ColumnD>> tableColumnMap = this.dicSvc.getColumnMap(schemaName, tableList);
+		Map<String, List<ColumnD>> tableColumnMap = this.dicSvc.getColumnMap(this.schemaName, tableList);
 		values.put("tableColumnMap", tableColumnMap);
 		
 		// DB 스키마에서 관계 정보 추출 및 value 컨테이너에 추가
 		values.put("relationList", DicUtil.getRelationList(tableColumnMap));
 		
 		// 시퀀스 목록 조회
-		values.put("sequenceList", this.dicSvc.getSequenceList(schemaName));
+		values.put("sequenceList", this.dicSvc.getSequenceList(this.schemaName));
 		
 		// 뷰 목록 조회
-		values.put("viewList", this.dicSvc.getViewList(schemaName));
+		values.put("viewList", this.dicSvc.getViewList(this.schemaName));
 		
 		return values;
 	}

@@ -23,7 +23,7 @@ public class XlsxSchemaExporter extends SchemaExporter {
 	private static final String FORMAT_FILE = "excel_format.xml";
 	
 	/** 출력 엑셀 파일 명 */
-	@Value("${spring.datasource.exporter.xlsx.outfile}")
+	@Value("${exporter.xlsx.outfile}")
 	private String outFileName;
 	
 	/** 출력할 엑셀 파일 */

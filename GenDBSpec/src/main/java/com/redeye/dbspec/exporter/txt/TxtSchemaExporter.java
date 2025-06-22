@@ -24,7 +24,7 @@ public class TxtSchemaExporter extends SchemaExporter {
 	private static final String FORMAT_FILE = "markdown_format.xml";
 	
 	/** 출력 엑셀 파일 명 */
-	@Value("${spring.datasource.exporter.txt.outfile}")
+	@Value("${exporter.txt.outfile}")
 	private String outFileName;
 	
 	/** 출력할 텍스트 파일 */

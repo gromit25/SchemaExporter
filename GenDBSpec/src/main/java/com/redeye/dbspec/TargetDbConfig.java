@@ -70,19 +70,19 @@ public class TargetDbConfig {
 	private DBType type;
 	
 	/** 대상 DB의 타입 설정 문자열 */
-	@Value("${spring.datasource.target.type}")
+	@Value("${target.datasource.type}")
 	private String typeStr;
 	
 	/** 접속 URL */
-	@Value("${spring.datasource.target.url}")
+	@Value("${target.datasource.url}")
 	private String url;
 	
 	/** 접속 UserName */
-	@Value("${spring.datasource.target.username}")
+	@Value("${target.datasource.username}")
 	private String username;
 	
 	/** 접속 Password */
-	@Value("${spring.datasource.target.password}")
+	@Value("${target.datasource.password}")
 	private String password;
 	
     @Bean(name = "targetDataSource")
@@ -90,9 +90,9 @@ public class TargetDbConfig {
     	
         return DataSourceBuilder.create()
 	        .driverClassName(this.getType().getDriverClassName())
-	        .url(url)
-	        .username(username)
-	        .password(password)
+	        .url(this.url)
+	        .username(this.username)
+	        .password(this.password)
 			.build();
     }
 
