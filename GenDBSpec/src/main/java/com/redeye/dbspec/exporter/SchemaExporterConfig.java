@@ -46,6 +46,7 @@ public class SchemaExporterConfig {
 		// 초기화 실행
 		// 생성자로 초기화하지 않는 이유는
 		// 특정 환경변수가 없을 경우 생성시 오류가 발생하기 때문임
+		// 즉, 필요한 컴포넌트만 초기화 함, 사용하지 않는 컴포넌트는 초기화하지 않음
 		exporter.init();
 		
 		return exporter;
