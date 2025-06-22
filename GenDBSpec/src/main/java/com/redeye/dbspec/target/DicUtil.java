@@ -44,9 +44,11 @@ public class DicUtil {
             // table 관계를 생성 및 추가
             StringBuilder relationStr = new StringBuilder("");
             
-            relationStr.append(column.getRefTableName());
-            relationStr.append(" ||--o{ ");
-            relationStr.append(column.getTableName());
+            relationStr
+            	.append(column.getRefTableName())
+            	.append(" ||--o{ ")
+            	.append(column.getTableName())
+            	.append(": \"\"");
             
             relationSet.add(relationStr.toString());
          });
