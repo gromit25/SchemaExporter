@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jutools.DateUtil;
 import com.redeye.dbspec.common.dto.ColumnD;
 import com.redeye.dbspec.common.dto.KeyColumnD;
 import com.redeye.dbspec.common.dto.SequenceD;
@@ -24,6 +25,41 @@ public class DicS {
 	/** 스키마 정보 추출 Mapper */
 	@Autowired
 	private DicM mapper;
+	
+	/**
+	 * DB 스키마 정보 반환
+	 * 
+	 * @param schemaName 스키마 명
+	 * @return DB 스키마 정보
+	 */
+	public Map<String, Object> getSchemaInfo(String schemaName) throws Exception {
+		
+		// 스키마 정보
+		Map<String, Object> values = new HashMap<>();
+		
+		// 오늘 날짜 설정
+		String today = DateUtil.getDateStr(System.currentTimeMillis(), ".");
+		values.put("today", today);
+		
+		// 테이블 정보 목록 획득 및 설정
+		List<TableD> tableList = this.getTableList(schemaName);
+		values.put("tableList", tableList);
+		
+		// 테이블별 컬럼 정보 목록 획득 및 설정
+		Map<String, List<ColumnD>> tableColumnMap = this.getColumnMap(schemaName, tableList);
+		values.put("tableColumnMap", tableColumnMap);
+		
+		// DB 스키마에서 관계 정보 추출 및 value 컨테이너에 추가
+		values.put("relationList", DicUtil.getRelationList(tableColumnMap));
+		
+		// 시퀀스 목록 조회
+		values.put("sequenceList", this.getSequenceList(schemaName));
+		
+		// 뷰 목록 조회
+		values.put("viewList", this.getViewList(schemaName));
+		
+		return values;
+	}
 
 	/**
 	 * 테이블 목록 반환

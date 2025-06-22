@@ -21,29 +21,29 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
  */
 @Configuration
 @MapperScan(
-	basePackages = "com.redeye.dbspec.misc",
-	sqlSessionFactoryRef = "miscSqlSessionFactory"
+	basePackages = "com.redeye.dbspec.exporter.db",
+	sqlSessionFactoryRef = "exporterSqlSessionFactory"
 )
-public class MiscDbConfig {
+public class DBSchemaExporterConfig {
 	
 	/** 접속 드라이버 클래스 명 */
-	@Value("${spring.datasource.misc.driver-class-name}")
+	@Value("${spring.datasource.exporter.db.driver-class-name}")
 	private String driverClassName;
 	
 	/** 접속 URL */
-	@Value("${spring.datasource.misc.url}")
+	@Value("${spring.datasource.exporter.db.url}")
 	private String url;
 	
 	/** 접속 UserName */
-	@Value("${spring.datasource.misc.username}")
+	@Value("${spring.datasource.exporter.db.username}")
 	private String username;
 	
 	/** 접속 Password */
-	@Value("${spring.datasource.misc.password}")
+	@Value("${spring.datasource.exporter.db.password}")
 	private String password;
 
 	
-    @Bean(name = "miscDataSource")
+    @Bean(name = "exporterDataSource")
     DataSource dataSource() {
     	
         return DataSourceBuilder.create()
@@ -54,8 +54,8 @@ public class MiscDbConfig {
 			.build();
     }
 
-    @Bean(name = "miscSqlSessionFactory")
-    SqlSessionFactory sqlSessionFactory(@Qualifier("miscDataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "exporterSqlSessionFactory")
+    SqlSessionFactory sqlSessionFactory(@Qualifier("exporterDataSource") DataSource dataSource) throws Exception {
 
     	// Mapper 자원 로딩
         Resource[] resources = new PathMatchingResourcePatternResolver()
@@ -69,8 +69,8 @@ public class MiscDbConfig {
         return sessionFactory.getObject();
     }
 
-    @Bean(name = "miscSqlSessionTemplate")
-    SqlSessionTemplate sqlSessionTemplate(@Qualifier("miscSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = "exporterSqlSessionTemplate")
+    SqlSessionTemplate sqlSessionTemplate(@Qualifier("exporterSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
