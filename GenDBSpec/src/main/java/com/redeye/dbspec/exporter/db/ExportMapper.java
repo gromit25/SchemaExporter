@@ -16,7 +16,7 @@ import com.redeye.dbspec.common.dto.ViewD;
  * @author jmsohn
  */
 @Mapper
-public interface MiscM {
+public interface ExportMapper {
 	
 	/**
 	 * 

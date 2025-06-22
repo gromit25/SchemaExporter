@@ -25,7 +25,7 @@ public class DBSchemaExporter extends SchemaExporter {
 	
 	/** 스키마 정보 저장 Mapper */
 	@Autowired
-	private MiscM mapper;
+	private ExportMapper mapper;
 
 	public void init() throws Exception {
 		// Do nothing
