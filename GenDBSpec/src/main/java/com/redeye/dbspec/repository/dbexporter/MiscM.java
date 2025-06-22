@@ -1,4 +1,4 @@
-package com.redeye.dbspec.misc;
+package com.redeye.dbspec.repository.dbexporter;
 
 import java.util.List;
 
