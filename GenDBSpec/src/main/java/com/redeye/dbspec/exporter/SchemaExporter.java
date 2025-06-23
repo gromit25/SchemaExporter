@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.jutools.DateUtil;
 import com.jutools.StringUtil;
-import com.redeye.dbspec.domain.entity.ColumnD;
-import com.redeye.dbspec.domain.entity.TableD;
+import com.redeye.dbspec.domain.entity.ColumnDto;
+import com.redeye.dbspec.domain.entity.TableDto;
 import com.redeye.dbspec.target.DicS;
 import com.redeye.dbspec.target.DicUtil;
 
@@ -74,11 +74,11 @@ public abstract class SchemaExporter {
 		values.put("today", today);
 		
 		// 테이블 정보 목록 획득 및 설정
-		List<TableD> tableList = this.dicSvc.getTableList(this.schemaName);
+		List<TableDto> tableList = this.dicSvc.getTableList(this.schemaName);
 		values.put("tableList", tableList);
 		
 		// 테이블별 컬럼 정보 목록 획득 및 설정
-		Map<String, List<ColumnD>> tableColumnMap = this.dicSvc.getColumnMap(this.schemaName, tableList);
+		Map<String, List<ColumnDto>> tableColumnMap = this.dicSvc.getColumnMap(this.schemaName, tableList);
 		values.put("tableColumnMap", tableColumnMap);
 		
 		// DB 스키마에서 관계 정보 추출 및 value 컨테이너에 추가

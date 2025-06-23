@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jutools.TypeUtil;
-import com.redeye.dbspec.domain.entity.ColumnD;
+import com.redeye.dbspec.domain.entity.ColumnDto;
 
 /**
  * 유틸리티 클래스
@@ -22,7 +22,7 @@ public class DicUtil {
     * @param columnMap table-column map
     * @return table 관계 문자열 목록
     */
-   public static List<String> getRelationList(Map<String, List<ColumnD>> columnMap) throws Exception {
+   public static List<String> getRelationList(Map<String, List<ColumnDto>> columnMap) throws Exception {
       
       // 입력값 검증
       if(columnMap == null) {

@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.redeye.dbspec.domain.entity.ColumnD;
-import com.redeye.dbspec.domain.entity.SequenceD;
-import com.redeye.dbspec.domain.entity.TableD;
-import com.redeye.dbspec.domain.entity.ViewD;
+import com.redeye.dbspec.domain.entity.ColumnDto;
+import com.redeye.dbspec.domain.entity.SequenceDto;
+import com.redeye.dbspec.domain.entity.TableDto;
+import com.redeye.dbspec.domain.entity.ViewDto;
 
 /**
  * Schema 를 데이터베이스에 저장하는 Mapper
@@ -26,7 +26,7 @@ public interface ExportMapper {
 	 */
 	public void upsertTableList(
 		@Param("schemaName") String schemaName,
-		@Param("tableList") List<TableD> tableList
+		@Param("tableList") List<TableDto> tableList
 	);
 	
 	/**
@@ -37,7 +37,7 @@ public interface ExportMapper {
 	 */
 	public void upsertColumnList(
 		@Param("schemaName") String schemaName,
-		@Param("columnList") List<ColumnD> columnList
+		@Param("columnList") List<ColumnDto> columnList
 	);
 	
 	/**
@@ -48,7 +48,7 @@ public interface ExportMapper {
 	 */
 	public void upsertSequenceList(
 		@Param("schemaName") String schemaName,
-		@Param("sequenceList") List<SequenceD> sequenceList
+		@Param("sequenceList") List<SequenceDto> sequenceList
 	);
 	
 	/**
@@ -59,6 +59,6 @@ public interface ExportMapper {
 	 */
 	public void upsertViewList(
 		@Param("schemaName") String schemaName,
-		@Param("viewList") List<ViewD> viewList
+		@Param("viewList") List<ViewDto> viewList
 	);
 }

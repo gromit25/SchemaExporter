@@ -6,10 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.redeye.dbspec.domain.entity.ColumnD;
-import com.redeye.dbspec.domain.entity.SequenceD;
-import com.redeye.dbspec.domain.entity.TableD;
-import com.redeye.dbspec.domain.entity.ViewD;
+import com.redeye.dbspec.domain.entity.ColumnDto;
+import com.redeye.dbspec.domain.entity.SequenceDto;
+import com.redeye.dbspec.domain.entity.TableDto;
+import com.redeye.dbspec.domain.entity.ViewDto;
 import com.redeye.dbspec.exporter.SchemaExporter;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,12 +40,12 @@ public class DBSchemaExporter extends SchemaExporter {
 		String schemaName = (String)values.get("schemaName");
 		
 		// 테이블 정보 저장
-		List<TableD> tableList = (List<TableD>)values.get("tableList");
+		List<TableDto> tableList = (List<TableDto>)values.get("tableList");
 		this.mapper.upsertTableList(schemaName, tableList);
 		log.info("table list saved sucessfully.");
 		
 		// 컬럼 정보 저장
-		Map<String, List<ColumnD>> tableColumnMap = (Map<String, List<ColumnD>>)values.get("tableList");
+		Map<String, List<ColumnDto>> tableColumnMap = (Map<String, List<ColumnDto>>)values.get("tableList");
 		tableColumnMap.forEach(
 			(tableName, columnList) -> {
 				this.mapper.upsertColumnList(schemaName, columnList);
@@ -54,12 +54,12 @@ public class DBSchemaExporter extends SchemaExporter {
 		log.info("column list saved sucessfully.");
 		
 		// 시퀀스 정보 저장
-		List<SequenceD> sequenceList = (List<SequenceD>)values.get("sequenceList");
+		List<SequenceDto> sequenceList = (List<SequenceDto>)values.get("sequenceList");
 		this.mapper.upsertSequenceList(schemaName, sequenceList);
 		log.info("sequence list saved sucessfully.");
 		
 		// 뷰 정보 저장
-		List<ViewD> viewList = (List<ViewD>)values.get("viewList");
+		List<ViewDto> viewList = (List<ViewDto>)values.get("viewList");
 		this.mapper.upsertViewList(schemaName, viewList);
 		log.info("view list saved sucessfully.");
 		

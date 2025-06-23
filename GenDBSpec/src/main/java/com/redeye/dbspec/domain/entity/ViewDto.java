@@ -3,19 +3,19 @@ package com.redeye.dbspec.domain.entity;
 import lombok.Data;
 
 /**
- * 테이블 정보 DTO
+ * 뷰 DTO
  * 
  * @author jmsohn
  */
 @Data
-public class TableD {
+public class ViewDto {
 
 	/** 스키마 아이디 */
 	private int schemaId;
 	
-	/** 테이블 명 */
-	private String tableName;
+	/** 뷰 명 */
+	private String viewName;
 	
-	/** 테이블 주석 */
-	private String description;
+	/** 뷰 쿼리 문자열 */
+	private String query;
 }

@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jutools.DateUtil;
-import com.redeye.dbspec.domain.entity.ColumnD;
-import com.redeye.dbspec.domain.entity.KeyColumnD;
-import com.redeye.dbspec.domain.entity.SequenceD;
-import com.redeye.dbspec.domain.entity.TableD;
-import com.redeye.dbspec.domain.entity.ViewD;
+import com.redeye.dbspec.domain.entity.ColumnDto;
+import com.redeye.dbspec.domain.entity.KeyColumnDto;
+import com.redeye.dbspec.domain.entity.SequenceDto;
+import com.redeye.dbspec.domain.entity.TableDto;
+import com.redeye.dbspec.domain.entity.ViewDto;
 
 /**
  * 스키마 정보 추출 서비스
@@ -42,11 +42,11 @@ public class DicS {
 		values.put("today", today);
 		
 		// 테이블 정보 목록 획득 및 설정
-		List<TableD> tableList = this.getTableList(schemaName);
+		List<TableDto> tableList = this.getTableList(schemaName);
 		values.put("tableList", tableList);
 		
 		// 테이블별 컬럼 정보 목록 획득 및 설정
-		Map<String, List<ColumnD>> tableColumnMap = this.getColumnMap(schemaName, tableList);
+		Map<String, List<ColumnDto>> tableColumnMap = this.getColumnMap(schemaName, tableList);
 		values.put("tableColumnMap", tableColumnMap);
 		
 		// DB 스키마에서 관계 정보 추출 및 value 컨테이너에 추가
@@ -67,7 +67,7 @@ public class DicS {
 	 * @param schemaName 스키마명
 	 * @return 테이블 목록
 	 */
-	public List<TableD> getTableList(String schemaName) throws Exception {
+	public List<TableDto> getTableList(String schemaName) throws Exception {
 		return this.mapper.selectTables(schemaName);
 	}
 
@@ -79,7 +79,7 @@ public class DicS {
 	 * @param tableList 테이블 명 목록
 	 * @return 테이블별 컬럼 목록 반환
 	 */
-	public Map<String, List<ColumnD>> getColumnMap(String schemaName, List<TableD> tableList) throws Exception {
+	public Map<String, List<ColumnDto>> getColumnMap(String schemaName, List<TableDto> tableList) throws Exception {
 		
 		// 입력값 검증
 		if(tableList == null) {
@@ -88,17 +88,17 @@ public class DicS {
 		
 		// 테이블별 컬럼 정보 목록 획득 및 설정
 		// Key - 테이블 명, Value - 컬럼 정보
-		Map<String, List<ColumnD>> tableColumnMap = new HashMap<>();
+		Map<String, List<ColumnDto>> tableColumnMap = new HashMap<>();
 		
 		// 컬럼별 Key 정보(PK, FK 등)을 업데이트 하기 위한 용도
 		// Key - 테이블 명.컬럼 명, Value - 컬럼 정보
-		Map<String, ColumnD> columnMap = new HashMap<>();
+		Map<String, ColumnDto> columnMap = new HashMap<>();
 		
 		tableList.forEach(table -> {
 			
 			// 테이블명에 따라 컬럼 정보 획득
 			String tableName = table.getTableName();
-			List<ColumnD> columnList = this.mapper.selectColumns(schemaName, tableName);
+			List<ColumnDto> columnList = this.mapper.selectColumns(schemaName, tableName);
 			
 			// 테이블에 컬럼 목록 저장
 			tableColumnMap.put(tableName, columnList);
@@ -114,7 +114,7 @@ public class DicS {
 			
 			// 테이블의 키 정보 획득
 			String tableName = table.getTableName();
-			List<KeyColumnD> keyColumns = this.mapper.selectKeyColumns(schemaName, tableName);
+			List<KeyColumnDto> keyColumns = this.mapper.selectKeyColumns(schemaName, tableName);
 			
 			// 컬럼별 키 정보 추가
 			keyColumns.forEach(keyColumn -> {
@@ -126,7 +126,7 @@ public class DicS {
 				}
 				
 				//
-				ColumnD column = columnMap.get(key);
+				ColumnDto column = columnMap.get(key);
 				
 				// 키 타입에 따른 처리
 				switch(keyColumn.getKeyType()) {
@@ -160,7 +160,7 @@ public class DicS {
 	 * @param schemaName 스키마 명
 	 * @return 시퀀스 목록
 	 */
-	public List<SequenceD> getSequenceList(String schemaName) throws Exception {
+	public List<SequenceDto> getSequenceList(String schemaName) throws Exception {
 		return this.mapper.selectSeq(schemaName);
 	}
 	
@@ -170,7 +170,7 @@ public class DicS {
 	 * @param schemaName 스키마 명
 	 * @return 뷰 목록
 	 */
-	public List<ViewD> getViewList(String schemaName) throws Exception {
+	public List<ViewDto> getViewList(String schemaName) throws Exception {
 		return this.mapper.selectView(schemaName);
 	}
 }
