@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.redeye.dbspec.domain.entity.ColumnDto;
-import com.redeye.dbspec.domain.entity.KeyColumnDto;
-import com.redeye.dbspec.domain.entity.TableDto;
+import com.redeye.dbspec.domain.ColumnDto;
+import com.redeye.dbspec.domain.KeyColumnDto;
+import com.redeye.dbspec.domain.TableDto;
 import com.redeye.dbspec.target.SchemaMapper;
 
 @SpringBootTest

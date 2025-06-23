@@ -1,4 +1,4 @@
-package com.redeye.dbspec.domain.entity;
+package com.redeye.dbspec.domain;
 
 import lombok.Data;
 

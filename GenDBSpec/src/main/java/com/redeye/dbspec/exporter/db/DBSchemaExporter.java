@@ -6,10 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.redeye.dbspec.domain.entity.ColumnDto;
-import com.redeye.dbspec.domain.entity.SequenceDto;
-import com.redeye.dbspec.domain.entity.TableDto;
-import com.redeye.dbspec.domain.entity.ViewDto;
+import com.redeye.dbspec.domain.ColumnDto;
+import com.redeye.dbspec.domain.SequenceDto;
+import com.redeye.dbspec.domain.TableDto;
+import com.redeye.dbspec.domain.ViewDto;
 import com.redeye.dbspec.exporter.SchemaExporter;
 
 import lombok.extern.slf4j.Slf4j;

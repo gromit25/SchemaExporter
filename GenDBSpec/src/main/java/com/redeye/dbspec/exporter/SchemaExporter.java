@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.jutools.DateUtil;
 import com.jutools.StringUtil;
-import com.redeye.dbspec.domain.entity.ColumnDto;
-import com.redeye.dbspec.domain.entity.TableDto;
+import com.redeye.dbspec.domain.ColumnDto;
+import com.redeye.dbspec.domain.TableDto;
 import com.redeye.dbspec.target.SchemaService;
 import com.redeye.dbspec.target.SchemaUtil;
 
