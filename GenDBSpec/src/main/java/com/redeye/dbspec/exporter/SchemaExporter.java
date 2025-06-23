@@ -11,8 +11,8 @@ import com.jutools.DateUtil;
 import com.jutools.StringUtil;
 import com.redeye.dbspec.domain.entity.ColumnDto;
 import com.redeye.dbspec.domain.entity.TableDto;
-import com.redeye.dbspec.target.DicS;
-import com.redeye.dbspec.target.DicUtil;
+import com.redeye.dbspec.target.SchemaService;
+import com.redeye.dbspec.target.SchemaUtil;
 
 /**
  * 스키마를 외부 저장소(DB, Excel, Text 등)에 출력하는 클래스
@@ -27,7 +27,7 @@ public abstract class SchemaExporter {
 	
 	/** 스키마 정보 추출 서비스 */
 	@Autowired
-	private DicS dicSvc;
+	private SchemaService dicSvc;
 	
 	/**
 	 * 초기화 수행
@@ -82,7 +82,7 @@ public abstract class SchemaExporter {
 		values.put("tableColumnMap", tableColumnMap);
 		
 		// DB 스키마에서 관계 정보 추출 및 value 컨테이너에 추가
-		values.put("relationList", DicUtil.getRelationList(tableColumnMap));
+		values.put("relationList", SchemaUtil.getRelationList(tableColumnMap));
 		
 		// 시퀀스 목록 조회
 		values.put("sequenceList", this.dicSvc.getSequenceList(this.schemaName));

@@ -20,11 +20,11 @@ import com.redeye.dbspec.domain.entity.ViewDto;
  * @author jmsohn
  */
 @Service
-public class DicS {
+public class SchemaService {
 	
 	/** 스키마 정보 추출 Mapper */
 	@Autowired
-	private DicM mapper;
+	private SchemaMapper mapper;
 	
 	/**
 	 * DB 스키마 정보 반환
@@ -50,7 +50,7 @@ public class DicS {
 		values.put("tableColumnMap", tableColumnMap);
 		
 		// DB 스키마에서 관계 정보 추출 및 value 컨테이너에 추가
-		values.put("relationList", DicUtil.getRelationList(tableColumnMap));
+		values.put("relationList", SchemaUtil.getRelationList(tableColumnMap));
 		
 		// 시퀀스 목록 조회
 		values.put("sequenceList", this.getSequenceList(schemaName));

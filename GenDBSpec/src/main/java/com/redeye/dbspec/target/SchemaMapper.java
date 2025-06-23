@@ -18,7 +18,7 @@ import com.redeye.dbspec.domain.entity.ViewDto;
  * @author jmsohn
  */
 @Mapper
-public interface DicM {
+public interface SchemaMapper {
 	
 	/**
 	 * 테이블 목록 반환

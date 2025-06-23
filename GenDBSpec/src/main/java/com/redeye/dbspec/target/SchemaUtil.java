@@ -14,7 +14,7 @@ import com.redeye.dbspec.domain.entity.ColumnDto;
  * 
  * @author jmsohn
  */
-public class DicUtil {
+public class SchemaUtil {
 	
    /**
     * table-column map 에서 table 관계를 추출하여 반환

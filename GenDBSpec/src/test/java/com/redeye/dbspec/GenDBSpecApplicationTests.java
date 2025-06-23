@@ -9,13 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.redeye.dbspec.domain.entity.ColumnDto;
 import com.redeye.dbspec.domain.entity.KeyColumnDto;
 import com.redeye.dbspec.domain.entity.TableDto;
-import com.redeye.dbspec.target.DicM;
+import com.redeye.dbspec.target.SchemaMapper;
 
 @SpringBootTest
 class GenDBSpecApplicationTests {
 	
 	@Autowired
-	DicM mapper;
+	SchemaMapper mapper;
 
 	@Test
 	void testSelectTables_1() {
