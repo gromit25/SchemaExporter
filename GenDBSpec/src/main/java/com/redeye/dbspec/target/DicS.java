@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jutools.DateUtil;
-import com.redeye.dbspec.common.dto.ColumnD;
-import com.redeye.dbspec.common.dto.KeyColumnD;
-import com.redeye.dbspec.common.dto.SequenceD;
-import com.redeye.dbspec.common.dto.TableD;
-import com.redeye.dbspec.common.dto.ViewD;
+import com.redeye.dbspec.domain.entity.ColumnD;
+import com.redeye.dbspec.domain.entity.KeyColumnD;
+import com.redeye.dbspec.domain.entity.SequenceD;
+import com.redeye.dbspec.domain.entity.TableD;
+import com.redeye.dbspec.domain.entity.ViewD;
 
 /**
  * 스키마 정보 추출 서비스

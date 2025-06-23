@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.redeye.dbspec.common.dto.ColumnD;
-import com.redeye.dbspec.common.dto.KeyColumnD;
-import com.redeye.dbspec.common.dto.SequenceD;
-import com.redeye.dbspec.common.dto.TableD;
-import com.redeye.dbspec.common.dto.ViewD;
+import com.redeye.dbspec.domain.entity.ColumnD;
+import com.redeye.dbspec.domain.entity.KeyColumnD;
+import com.redeye.dbspec.domain.entity.SequenceD;
+import com.redeye.dbspec.domain.entity.TableD;
+import com.redeye.dbspec.domain.entity.ViewD;
 
 
 /**

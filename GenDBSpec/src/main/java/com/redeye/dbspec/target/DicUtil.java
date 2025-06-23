@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jutools.TypeUtil;
-import com.redeye.dbspec.common.dto.ColumnD;
+import com.redeye.dbspec.domain.entity.ColumnD;
 
 /**
  * 유틸리티 클래스
