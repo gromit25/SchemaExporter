@@ -1,4 +1,4 @@
-package com.redeye.dbspec.exporter.db;
+package com.redeye.dbspec.config;
 
 import javax.sql.DataSource;
 
