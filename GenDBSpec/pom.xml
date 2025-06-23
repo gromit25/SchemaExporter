@@ -11,10 +11,10 @@
 	</parent>
 	
 	<groupId>com.redeye</groupId>
-	<artifactId>dbspec</artifactId>
+	<artifactId>schema-exporter</artifactId>
 	<version>0.1</version>
-	<name>springdb-1</name>
-	<description>DB 테이블 명세 생성</description>
+	<name>schema-exporter</name>
+	<description>DB 스키마를 DB, Excel, Text로 출력</description>
 	
 	<properties>
 		<java.version>17</java.version>
