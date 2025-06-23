@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Component
 @Slf4j
-public class DBSchemaExporter extends SchemaExporter {
+public class SchemaDBExporter extends SchemaExporter {
 	
 	/** 스키마 정보 저장 Mapper */
 	@Autowired

@@ -26,7 +26,7 @@ import com.jutools.DBDriver;
 	basePackages = "com.redeye.dbspec.exporter.db",
 	sqlSessionFactoryRef = "exporterSqlSessionFactory"
 )
-public class DBSchemaExporterConfig {
+public class SchemaDBExporterConfig {
 	
 	/** db type */
 	@Value("${exporter.db.datasource.type}")

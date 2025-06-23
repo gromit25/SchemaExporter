@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 import com.jutools.StringUtil;
 import com.redeye.dbspec.exporter.SchemaExporter;
-import com.redeye.dbspec.exporter.db.DBSchemaExporter;
-import com.redeye.dbspec.exporter.txt.TxtSchemaExporter;
-import com.redeye.dbspec.exporter.xlsx.XlsxSchemaExporter;
+import com.redeye.dbspec.exporter.db.SchemaDBExporter;
+import com.redeye.dbspec.exporter.txt.SchemaTxtExporter;
+import com.redeye.dbspec.exporter.xlsx.SchemaXlsxExporter;
 
 /**
  * SchemaExporter 를 설정하기 위한 설정 컴포넌트
@@ -38,9 +38,9 @@ public class SchemaExporterConfig {
 		// exporter type 별로 설정
 		SchemaExporter exporter = 
 			switch(this.exporterType) {
-				case "DB" -> context.getBean(DBSchemaExporter.class);
-				case "TXT" -> context.getBean(TxtSchemaExporter.class);
-				case "XLSX" -> context.getBean(XlsxSchemaExporter.class);
+				case "DB" -> context.getBean(SchemaDBExporter.class);
+				case "TXT" -> context.getBean(SchemaTxtExporter.class);
+				case "XLSX" -> context.getBean(SchemaXlsxExporter.class);
 				default -> throw new Exception("unexpected exporter type:" + exporterType);
 			};
 			

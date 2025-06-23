@@ -17,7 +17,7 @@ import com.redeye.dbspec.exporter.SchemaExporter;
  * @author jmsohn
  */
 @Component
-public class XlsxSchemaExporter extends SchemaExporter {
+public class SchemaXlsxExporter extends SchemaExporter {
 
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "excel_format.xml";

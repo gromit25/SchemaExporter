@@ -18,7 +18,7 @@ import com.redeye.dbspec.exporter.SchemaExporter;
  * @author jmsohn
  */
 @Component
-public class TxtSchemaExporter extends SchemaExporter {
+public class SchemaTxtExporter extends SchemaExporter {
 	
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "markdown_format.xml";
