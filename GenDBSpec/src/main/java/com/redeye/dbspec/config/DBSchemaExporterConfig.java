@@ -44,10 +44,6 @@ public class DBSchemaExporterConfig {
 	@Value("${exporter.db.datasource.database}")
 	private String database;
 	
-	/** 접속 URL */
-	@Value("${exporter.db.datasource.url}")
-	private String url;
-	
 	/** 접속 UserName */
 	@Value("${exporter.db.datasource.username}")
 	private String username;
