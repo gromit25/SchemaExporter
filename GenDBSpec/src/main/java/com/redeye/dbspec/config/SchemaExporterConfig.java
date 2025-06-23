@@ -1,4 +1,4 @@
-package com.redeye.dbspec.exporter;
+package com.redeye.dbspec.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.jutools.StringUtil;
+import com.redeye.dbspec.exporter.SchemaExporter;
 import com.redeye.dbspec.exporter.db.DBSchemaExporter;
 import com.redeye.dbspec.exporter.txt.TxtSchemaExporter;
 import com.redeye.dbspec.exporter.xlsx.XlsxSchemaExporter;
