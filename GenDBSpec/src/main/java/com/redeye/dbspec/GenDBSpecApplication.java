@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.jutools.CronJob;
-import com.redeye.dbspec.exporter.SchemaExporter;
+import com.redeye.dbspec.exporter.Exporter;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +35,7 @@ public class GenDBSpecApplication implements CommandLineRunner {
 	 */
 	@Autowired
 	@Qualifier("exporter")
-	private SchemaExporter exporter;
+	private Exporter exporter;
 	
 	/**
 	 * 메인 메소드

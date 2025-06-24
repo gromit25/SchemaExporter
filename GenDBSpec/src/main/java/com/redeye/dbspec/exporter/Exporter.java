@@ -19,7 +19,7 @@ import com.redeye.dbspec.target.SchemaUtil;
  * 
  * @author jmsohn
  */
-public abstract class SchemaExporter {
+public abstract class Exporter {
 	
 	/** 추출할 스키마 명 */
 	@Value("${target.schema}")

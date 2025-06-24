@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.jutools.StringUtil;
-import com.redeye.dbspec.exporter.SchemaExporter;
-import com.redeye.dbspec.exporter.db.SchemaDBExporter;
-import com.redeye.dbspec.exporter.txt.SchemaTxtExporter;
-import com.redeye.dbspec.exporter.xlsx.SchemaXlsxExporter;
+import com.redeye.dbspec.exporter.Exporter;
+import com.redeye.dbspec.exporter.db.DBExporter;
+import com.redeye.dbspec.exporter.txt.TxtExporter;
+import com.redeye.dbspec.exporter.xlsx.XlsxExporter;
 
 /**
  * SchemaExporter 를 설정하기 위한 설정 컴포넌트
@@ -17,7 +17,7 @@ import com.redeye.dbspec.exporter.xlsx.SchemaXlsxExporter;
  * @author jmsohn
  */
 @Configuration
-public class SchemaExporterConfig {
+public class ExporterConfig {
 	
 	/** 출력 타입 */
 	@Value("${exporter.type}")
@@ -29,18 +29,18 @@ public class SchemaExporterConfig {
 	 * @return exporter 컴포넌트
 	 */
 	@Bean(name="exporter")
-	SchemaExporter getExporter(ApplicationContext context) throws Exception {
+	Exporter getExporter(ApplicationContext context) throws Exception {
 		
 		if(StringUtil.isBlank(this.exporterType) == true) {
 			throw new Exception("exporter type is null or blank.");
 		}
 
 		// exporter type 별로 설정
-		SchemaExporter exporter = 
+		Exporter exporter = 
 			switch(this.exporterType) {
-				case "DB" -> context.getBean(SchemaDBExporter.class);
-				case "TXT" -> context.getBean(SchemaTxtExporter.class);
-				case "XLSX" -> context.getBean(SchemaXlsxExporter.class);
+				case "DB" -> context.getBean(DBExporter.class);
+				case "TXT" -> context.getBean(TxtExporter.class);
+				case "XLSX" -> context.getBean(XlsxExporter.class);
 				default -> throw new Exception("unexpected exporter type:" + exporterType);
 			};
 			

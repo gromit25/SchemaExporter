@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.jutools.PublishUtil;
 import com.jutools.StringUtil;
-import com.redeye.dbspec.exporter.SchemaExporter;
+import com.redeye.dbspec.exporter.Exporter;
 
 /**
  * 텍스트 파일로 스키마를 툴력함
@@ -18,7 +18,7 @@ import com.redeye.dbspec.exporter.SchemaExporter;
  * @author jmsohn
  */
 @Component
-public class SchemaTxtExporter extends SchemaExporter {
+public class TxtExporter extends Exporter {
 	
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "markdown_format.xml";

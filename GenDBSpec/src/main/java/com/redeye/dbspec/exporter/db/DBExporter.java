@@ -10,7 +10,7 @@ import com.redeye.dbspec.domain.ColumnDto;
 import com.redeye.dbspec.domain.SequenceDto;
 import com.redeye.dbspec.domain.TableDto;
 import com.redeye.dbspec.domain.ViewDto;
-import com.redeye.dbspec.exporter.SchemaExporter;
+import com.redeye.dbspec.exporter.Exporter;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Component
 @Slf4j
-public class SchemaDBExporter extends SchemaExporter {
+public class DBExporter extends Exporter {
 	
 	/** 스키마 정보 저장 Mapper */
 	@Autowired

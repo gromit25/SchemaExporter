@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.jutools.PublishUtil;
 import com.jutools.StringUtil;
-import com.redeye.dbspec.exporter.SchemaExporter;
+import com.redeye.dbspec.exporter.Exporter;
 
 /**
  * 엑셀 파일로 스키마를 툴력함
@@ -17,7 +17,7 @@ import com.redeye.dbspec.exporter.SchemaExporter;
  * @author jmsohn
  */
 @Component
-public class SchemaXlsxExporter extends SchemaExporter {
+public class XlsxExporter extends Exporter {
 
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "excel_format.xml";
