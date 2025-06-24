@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import com.jutools.DBDriver;
+import com.jutools.DBDriverType;
 
 /**
  * 스키마 저장 데이터베이스 접속 설정 클래스
@@ -30,7 +30,7 @@ public class SchemaDBExporterConfig {
 	
 	/** db type */
 	@Value("${exporter.db.datasource.type}")
-	private String typeStr;
+	private DBDriverType type;
 	
 	/** host */
 	@Value("${exporter.db.datasource.host}")
@@ -56,11 +56,9 @@ public class SchemaDBExporterConfig {
     @Bean(name = "exporterDataSource")
     DataSource dataSource() throws Exception {
     	
-    	DBDriver driverType = DBDriver.find(this.typeStr);
-    	
         return DataSourceBuilder.create()
-	        .driverClassName(driverType.getDriver())
-	        .url(driverType.getUrl(this.host, this.port, this.database))
+	        .driverClassName(this.type.getDriver())
+	        .url(this.type.getUrl(this.host, this.port, this.database))
 	        .username(this.username)
 	        .password(this.password)
 			.build();

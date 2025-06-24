@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import lombok.Getter;
+import com.jutools.DBDriverType;
 
 /**
  * DB 스키마를 수집할 대상 데이터베이스 접속 설정 클래스
@@ -30,7 +30,7 @@ public class TargetDbConfig {
 	
     /** db type */
     @Value("${target.datasource.type}")
-    private String typeStr;
+    private DBDriverType type;
 	
     /** host */
     @Value("${target.datasource.host}")
@@ -53,13 +53,11 @@ public class TargetDbConfig {
     private String password;
 	
     @Bean(name = "targetDataSource")
-    DataSource dataSource() {
-
-        DBDriver driverType = DBDriver.find(this.typeStr);
+    DataSource dataSource() throws Exception {
 
         return DataSourceBuilder.create()
-	        .driverClassName(driverType.getDriver())
-	        .url(driverType.getUrl(this.host, this.port, this.database))
+	        .driverClassName(this.type.getDriver())
+	        .url(this.type.getUrl(this.host, this.port, this.database))
 	        .username(this.username)
 	        .password(this.password)
 			.build();
@@ -96,15 +94,11 @@ public class TargetDbConfig {
      */
     private String getMapperPath() throws Exception {
 
-        if(StringUtil.isBlank(this.typeStr) == true) {
-            throw new Exception("type is null or blank.");
-        }
-    	
-    	return switch(this.typeStr) {
-            case DBDriver.ORACLE.getName() -> "classpath:mapper/target/oracle/*.xml";
-            case DBDriver.POSTGRESQL.getName() -> "classpath:mapper/target/postgresql/*.xml";
-            case DBDriver.MYSQL.getName() -> "classpath:mapper/target/mysql/*.xml";
-            default -> throw new Exception("unexpected target db type:" + this.typeStr);
+    	return switch(this.type) {
+            case ORACLE -> "classpath:mapper/target/oracle/*.xml";
+            case POSTGRESQL -> "classpath:mapper/target/postgresql/*.xml";
+            case MYSQL -> "classpath:mapper/target/mysql/*.xml";
+            default -> throw new Exception("unexpected target db type:" + this.type);
         };
     }
 }
