@@ -2,10 +2,10 @@
 <workbook template="C:/workspace/GenDBSpec/src/main/resources/template.xlsx">
 
 	<!--  -->
-	<set name="prjName" exp="'EMMA for Tibco'"/>
-	<set name="schemaName" exp="'EMMA4TIBCO'"/>
-	<set name="deptName" exp="'전략솔루션개발팀'"/>
-	<set name="writer" exp="'손정모'"/>
+	<set name="prjName" value="ridertax"/>
+	<set name="schemaName" value="ridertax"/>
+	<set name="deptName" value="Backend"/>
+	<set name="writer" value="손정모"/>
 
 	<!-- 테이블 목록 출력 -->
 	<worksheet name="테이블목록">
