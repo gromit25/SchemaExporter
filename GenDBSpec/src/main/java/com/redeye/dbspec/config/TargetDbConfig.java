@@ -95,16 +95,16 @@ public class TargetDbConfig {
      * @return  대상 DB의 Mapper 위치
      */
     private String getMapperPath() throws Exception {
-	
+
         if(StringUtil.isBlank(this.typeStr) == true) {
             throw new Exception("type is null or blank.");
-	}
+        }
     	
     	return switch(this.typeStr) {
             case DBDriver.ORACLE.getName() -> "classpath:mapper/target/oracle/*.xml";
             case DBDriver.POSTGRESQL.getName() -> "classpath:mapper/target/postgresql/*.xml";
             case DBDriver.MYSQL.getName() -> "classpath:mapper/target/mysql/*.xml";
             default -> throw new Exception("unexpected target db type:" + this.typeStr);
-	};
+        };
     }
 }
