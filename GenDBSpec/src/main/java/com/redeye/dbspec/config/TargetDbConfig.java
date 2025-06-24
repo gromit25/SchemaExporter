@@ -101,10 +101,10 @@ public class TargetDbConfig {
 	}
     	
     	return switch(this.typeStr) {
-	    case DBDriver.ORACLE.getName() -> "classpath:mapper/target/oracle/*.xml";
-	    case DBDriver.POSTGRESQL.getName() -> "classpath:mapper/target/postgresql/*.xml";
-	    case DBDriver.MYSQL.getName() -> "classpath:mapper/target/mysql/*.xml";
-	    default -> throw new Exception("unexpected target db type:" + this.typeStr);
+            case DBDriver.ORACLE.getName() -> "classpath:mapper/target/oracle/*.xml";
+            case DBDriver.POSTGRESQL.getName() -> "classpath:mapper/target/postgresql/*.xml";
+            case DBDriver.MYSQL.getName() -> "classpath:mapper/target/mysql/*.xml";
+            default -> throw new Exception("unexpected target db type:" + this.typeStr);
 	};
     }
 }
