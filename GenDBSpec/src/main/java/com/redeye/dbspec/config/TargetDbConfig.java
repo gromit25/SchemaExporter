@@ -28,69 +28,38 @@ import lombok.Getter;
 )
 public class TargetDbConfig {
 	
-	/**
-	 * 대상 DB의 타입
-	 * 
-	 * @author jmsohn
-	 */
-	private enum DBType {
-		
-		/** Oracle DB */
-		ORACLE("oracle.jdbc.OracleDriver", "classpath:mapper/target/oracle/*.xml"),
-		
-		/** Postgresql DB */
-		POSTGRESQL("org.postgresql.Driver", "classpath:mapper/target/postgresql/*.xml"),
-		
-		/** MySQL DB */
-		MYSQL("com.mysql.cj.jdbc.Driver", "classpath:mapper/target/mysql/*.xml");
-		
-		// ---------------------
-		
-		/** DB 접속 드라이버 클래스 명 */
-		@Getter
-		private String driverClassName;
-		
-		/** mapper 위치 */
-		@Getter
-		private String mapperPath;
-		
-		/**
-		 * 생성자
-		 * 
-		 * @param driverClassName JDBC 드라이버 클래스 명
-		 * @param mapperPath Mapper 위치
-		 */
-		DBType(String driverClassName, String mapperPath) {
-			this.driverClassName = driverClassName;
-			this.mapperPath = mapperPath;
-		}
-	}
+    /** db type */
+    @Value("${target.datasource.type}")
+    private String typeStr;
+	
+    /** host */
+    @Value("${target.datasource.host}")
+    private String host;
+	
+    /** port */
+    @Value("${target.datasource.port}")
+    private int port;
 
-	/** 대상 DB의 타입 */
-	private DBType type;
+    /** database */
+    @Value("${target.datasource.database}")
+    private String database;
 	
-	/** 대상 DB의 타입 설정 문자열 */
-	@Value("${target.datasource.type}")
-	private String typeStr;
+    /** 접속 UserName */
+    @Value("${target.datasource.username}")
+    private String username;
 	
-	/** 접속 URL */
-	@Value("${target.datasource.url}")
-	private String url;
-	
-	/** 접속 UserName */
-	@Value("${target.datasource.username}")
-	private String username;
-	
-	/** 접속 Password */
-	@Value("${target.datasource.password}")
-	private String password;
+    /** 접속 Password */
+    @Value("${target.datasource.password}")
+    private String password;
 	
     @Bean(name = "targetDataSource")
     DataSource dataSource() {
-    	
+
+        DBDriver driverType = DBDriver.find(this.typeStr);
+
         return DataSourceBuilder.create()
-	        .driverClassName(this.getType().getDriverClassName())
-	        .url(this.url)
+	        .driverClassName(driverType.getDriver())
+	        .url(driverType.getUrl(this.host, this.port, this.database))
 	        .username(this.username)
 	        .password(this.password)
 			.build();
@@ -103,7 +72,7 @@ public class TargetDbConfig {
 
     	// Mapper 자원 로딩
         Resource[] resources = new PathMatchingResourcePatternResolver()
-                .getResources(this.getType().getMapperPath());
+                .getResources(this.getMapperPath());
     	
         // Session Factory 생성 후 반환
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -121,23 +90,21 @@ public class TargetDbConfig {
     }
     
     /**
-     * 대상 DB 타입 반환
+     * 대상 DB 에 따라 Mapper 위치 반환
      * 
-     * @return 대상 DB 타입
+     * @return  대상 DB의 Mapper 위치
      */
-    private DBType getType() {
+    private String getMapperPath() throws Exception {
+	
+        if(StringUtil.isBlank(this.typeStr) == true) {
+            throw new Exception("type is null or blank.");
+	}
     	
-    	if(this.type == null) {
-    		
-    		for(DBType candidateType: DBType.values()) {
-    			
-    			if(candidateType.name().equals(this.typeStr) == true) {
-    				this.type = candidateType;
-    				break;
-    			}
-    		}
-    	}
-    	
-    	return this.type;
+    	return switch(this.typeStr) {
+	    case DBDriver.ORACLE.getName() -> "classpath:mapper/target/oracle/*.xml";
+	    case DBDriver.POSTGRESQL.getName() -> "classpath:mapper/target/postgresql/*.xml";
+	    case DBDriver.MYSQL.getName() -> "classpath:mapper/target/mysql/*.xml";
+	    default -> throw new Exception("unexpected target db type:" + this.typeStr);
+	};
     }
 }
