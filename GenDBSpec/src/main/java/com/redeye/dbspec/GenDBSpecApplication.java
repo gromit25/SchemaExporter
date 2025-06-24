@@ -54,7 +54,8 @@ public class GenDBSpecApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		log.info("start schema exporter:" + this.runMode);
+		log.info("start schema exporter.");
+		log.info("run-mode : " + this.runMode);
 		
 		if(this.runMode == RunMode.CRON) {
 

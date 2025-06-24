@@ -14,11 +14,14 @@ import com.redeye.dbspec.domain.TableDto;
 import com.redeye.dbspec.target.SchemaService;
 import com.redeye.dbspec.target.SchemaUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 스키마를 외부 저장소(DB, Excel, Text 등)에 출력하는 클래스
  * 
  * @author jmsohn
  */
+@Slf4j
 public abstract class Exporter {
 	
 	/** 추출할 스키마 명 */
@@ -27,7 +30,7 @@ public abstract class Exporter {
 	
 	/** 스키마 정보 추출 서비스 */
 	@Autowired
-	private SchemaService dicSvc;
+	private SchemaService schemaSvc;
 	
 	/**
 	 * 초기화 수행
@@ -74,21 +77,26 @@ public abstract class Exporter {
 		values.put("today", today);
 		
 		// 테이블 정보 목록 획득 및 설정
-		List<TableDto> tableList = this.dicSvc.getTableList(this.schemaName);
+		List<TableDto> tableList = this.schemaSvc.getTableList(this.schemaName);
 		values.put("tableList", tableList);
+		log.info("table list loaded successfully.");
 		
 		// 테이블별 컬럼 정보 목록 획득 및 설정
-		Map<String, List<ColumnDto>> tableColumnMap = this.dicSvc.getColumnMap(this.schemaName, tableList);
+		Map<String, List<ColumnDto>> tableColumnMap = this.schemaSvc.getColumnMap(this.schemaName, tableList);
 		values.put("tableColumnMap", tableColumnMap);
+		log.info("table-column map loaded successfully.");
 		
 		// DB 스키마에서 관계 정보 추출 및 value 컨테이너에 추가
 		values.put("relationList", SchemaUtil.getRelationList(tableColumnMap));
+		log.info("table-relation list loaded successfully.");
 		
 		// 시퀀스 목록 조회
-		values.put("sequenceList", this.dicSvc.getSequenceList(this.schemaName));
+		values.put("sequenceList", this.schemaSvc.getSequenceList(this.schemaName));
+		log.info("sequence list loaded successfully.");
 		
 		// 뷰 목록 조회
-		values.put("viewList", this.dicSvc.getViewList(this.schemaName));
+		values.put("viewList", this.schemaSvc.getViewList(this.schemaName));
+		log.info("view list loaded successfully.");
 		
 		return values;
 	}
