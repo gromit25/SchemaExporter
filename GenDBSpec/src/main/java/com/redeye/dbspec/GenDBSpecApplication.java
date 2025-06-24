@@ -2,17 +2,22 @@ package com.redeye.dbspec;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.jutools.CronJob;
 import com.redeye.dbspec.exporter.SchemaExporter;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 스키마를 읽어 출력하는 메인 클래스
  * 
  * @author jmsohn
  */
+@Slf4j
 @SpringBootApplication
 public class GenDBSpecApplication implements CommandLineRunner {
 
@@ -21,8 +26,8 @@ public class GenDBSpecApplication implements CommandLineRunner {
 	private RunMode runMode;
 
 	/** 크론 실행 모드일 경우의 실행 주기 */
-	@Value("${app.cron.schedule}"}
-	private Stirng cronSchedule;
+	@Value("${app.cron.schedule}")
+	private String cronSchedule;
 	
 	/**
 	 * 출력 객체
@@ -49,6 +54,8 @@ public class GenDBSpecApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		log.info("start schema exporter:" + this.runMode);
+		
 		if(this.runMode == RunMode.CRON) {
 
 			// 크론잡 실행
@@ -57,7 +64,11 @@ public class GenDBSpecApplication implements CommandLineRunner {
 				.job(new Runnable() {
 					@Override
 					public void run() {
-						this.exporter.export();
+						try {
+							exporter.export();
+						} catch(Exception ex) {
+							log.error("exception occured.", ex);
+						}
 					}
 				})
 				.build().run();
