@@ -26,7 +26,7 @@ import com.jutools.DBDriverType;
 	basePackages = "com.redeye.dbspec.target",
 	sqlSessionFactoryRef = "targetSqlSessionFactory"
 )
-public class TargetDbConfig {
+public class TargetDBConfig {
 	
     /** db type */
     @Value("${target.datasource.type}")
