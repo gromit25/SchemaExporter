@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @SpringBootApplication
-public class GenDBSpecApplication implements CommandLineRunner {
+public class SchemaExporterApplication implements CommandLineRunner {
 
 	/** 실행 모드 */
 	@Value("${app.run-mode}")
@@ -43,7 +43,7 @@ public class GenDBSpecApplication implements CommandLineRunner {
 	 * @param args 명령행 인자
 	 */
 	public static void main(String[] args) {
-		SpringApplication.run(GenDBSpecApplication.class, args);
+		SpringApplication.run(SchemaExporterApplication.class, args);
 	}
 	
 	/**

@@ -12,7 +12,7 @@ import com.redeye.dbspec.domain.TableDto;
 import com.redeye.dbspec.target.SchemaMapper;
 
 @SpringBootTest
-class GenDBSpecApplicationTests {
+class SchemaExporterApplicationTests {
 	
 	@Autowired
 	SchemaMapper mapper;
