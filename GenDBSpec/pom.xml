@@ -18,6 +18,7 @@
 	
 	<properties>
 		<java.version>17</java.version>
+		<deploy.target.dir>C:/apps/schemaexporter>
 	</properties>
 	
 	<dependencies>
@@ -83,9 +84,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 
