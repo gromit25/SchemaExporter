@@ -142,6 +142,37 @@
 				</configuration>
 			</plugin>
 			
+			<!-- 의존성 관리 (별도 lib 에 복사)  -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${deploy.target.dir}/lib
+							</outputDirectory>
+
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<!--
+								lombok과 사용하지 않는 jar파일들은 복사하지 않음
+								lombok은 프로그램 개발시에만 필요함
+							-->
+							<excludeArtifactIds>
+								lombok
+							</excludeArtifactIds>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 	</build>
 
