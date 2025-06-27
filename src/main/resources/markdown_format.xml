@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<format>
+|```mermaid
+|erDiagram
+|
+<!-- 테이블 정보 출력 -->
+<foreach element="table" list="tableList">
+|    ${table.tableName} {
+
+	<!-- 테이블명별 컬럼 정보 설정 -->
+	<set name="columnList" exp="tableColumnMap[table.tableName]"/>
+	
+	<!-- 컬럼 정보 출력 -->
+	<foreach element="column" list="columnList">
+	
+		<!--
+			주석 메시지 생성
+			mermaid에서는 PK와 FK를 동시에 표기할 수 없고, Unique 도 표시할 수 없어
+			주석에 FK와 Unique(UQ)를 표시하도록 함
+		-->
+		<set name="comment" value=""/>
+		<if test="column.isUnique == 'T'">
+			<set name="comment" value="UQ"/>
+		</if>
+		<if test="column.isForeignKey == 'T'">
+			<set name="comment" exp="if(comment == '', 'FK(', ', FK(')"/>
+			<set name="comment" exp="comment + column.refTableName + '.' + column.refColumnName + ')'"/>
+		</if>
+		<set name="comment" exp="if(comment == '', column.description, comment + ': ' + column.description)"/>
+		
+|        ${column.type} ${column.columnName} ${if(column.isPrimaryKey == 'T', 'PK', '')} "${comment}"
+	</foreach>
+|    }
+</foreach>
+|
+<!-- 테이블 관계 정보 출력 -->
+<foreach element="relation" list="relationList">
+|    ${relation}
+</foreach>
+
+|```
+</format>
