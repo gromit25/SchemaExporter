@@ -132,10 +132,10 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<packageName>com.redeye.dbspec</packageName>
+							<packageName>com.redeye.schemaexporter</packageName>
 							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>
-								com.redeye.dbspec.SchemaExporterApplication
+								com.redeye.schemaexporter.SchemaExporterApplication
 							</mainClass>
 						</manifest>
 					</archive>
