@@ -132,7 +132,6 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<packageName>com.redeye.schemaexporter</packageName>
 							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>
 								com.redeye.schemaexporter.SchemaExporterApplication
