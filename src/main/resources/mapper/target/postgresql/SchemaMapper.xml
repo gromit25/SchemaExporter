@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.redeye.dbspec.target.SchemaMapper">
+<mapper namespace="com.redeye.schemaexporter.target.SchemaMapper">
 
 	<!-- 테이블 정보 추출 -->
-	<select id="selectTables" parameterType="java.lang.String" resultType="com.redeye.dbspec.domain.TableDto">
+	<select id="selectTables" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.TableDto">
 		select
 			relname as tableName
 			, description
@@ -21,7 +21,7 @@
 	</select>
 	
 	<!-- 특정 테이블의 컬럼 정보 추출 -->
-	<select id="selectColumns" parameterType="java.lang.String" resultType="com.redeye.dbspec.domain.ColumnDto">
+	<select id="selectColumns" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.ColumnDto">
 	<![CDATA[
 		select
 			c.relname as tableName
@@ -51,7 +51,7 @@
 	</select>
 	
 	<!-- 특정 테이블의 키 정보 추출 -->
-	<select id="selectKeyColumns" parameterType="java.lang.String" resultType="com.redeye.dbspec.domain.KeyColumnDto">
+	<select id="selectKeyColumns" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.KeyColumnDto">
 		select
 			c.relname as tableName
 			, a.attname as columnName
