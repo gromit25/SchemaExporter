@@ -23,7 +23,7 @@ import com.jutools.DBDriverType;
  */
 @Configuration
 @MapperScan(
-	basePackages = "com.redeye.dbspec.target",
+	basePackages = "com.redeye.schemaexporter.target",
 	sqlSessionFactoryRef = "targetSqlSessionFactory"
 )
 public class TargetDBConfig {
