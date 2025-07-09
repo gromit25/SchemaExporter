@@ -29,27 +29,27 @@ import com.jutools.DBDriverType;
 public class TargetDBConfig {
 	
     /** db type */
-    @Value("${target.datasource.type}")
+    @Value("${app.target.datasource.type}")
     private DBDriverType type;
 	
     /** host */
-    @Value("${target.datasource.host}")
+    @Value("${app.target.datasource.host}")
     private String host;
 	
     /** port */
-    @Value("${target.datasource.port}")
+    @Value("${app.target.datasource.port}")
     private int port;
 
     /** database */
-    @Value("${target.datasource.database}")
+    @Value("${app.target.datasource.database}")
     private String database;
 	
     /** 접속 UserName */
-    @Value("${target.datasource.username}")
+    @Value("${app.target.datasource.username}")
     private String username;
 	
     /** 접속 Password */
-    @Value("${target.datasource.password}")
+    @Value("${app.target.datasource.password}")
     private String password;
 	
     @Bean(name = "targetDataSource")

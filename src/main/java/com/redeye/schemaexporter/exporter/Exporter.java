@@ -25,18 +25,12 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class Exporter {
 	
 	/** 추출할 스키마 명 */
-	@Value("${target.schema}")
+	@Value("${app.target.schema}")
 	private String schemaName;
 	
 	/** 스키마 정보 추출 서비스 */
 	@Autowired
 	private SchemaService schemaSvc;
-	
-	/**
-	 * 초기화 수행
-	 * 출력할 파일등 설정 초기화 수행
-	 */
-	public abstract void init() throws Exception;
 	
 	/**
 	 * 스키마를 외부 저장소(DB, File 등)에 출력

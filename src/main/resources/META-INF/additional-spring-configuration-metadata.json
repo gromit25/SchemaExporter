@@ -10,83 +10,83 @@
     "description": "A description for 'app.cron.schedule'"
   },
   {
-    "name": "target.schema",
+    "name": "app.target.schema",
     "type": "java.lang.String",
-    "description": "A description for 'target.schema'"
+    "description": "A description for 'app.target.schema'"
   },
   {
-    "name": "target.datasource.type",
+    "name": "app.target.datasource.type",
     "type": "java.lang.String",
-    "description": "A description for 'target.datasource.type'"
+    "description": "A description for 'app.target.datasource.type'"
   },
   {
-    "name": "target.datasource.host",
+    "name": "app.target.datasource.host",
     "type": "java.lang.String",
-    "description": "A description for 'target.datasource.host'"
+    "description": "A description for 'app.target.datasource.host'"
   },
   {
-    "name": "target.datasource.port",
+    "name": "app.target.datasource.port",
     "type": "java.lang.String",
-    "description": "A description for 'target.datasource.port'"
+    "description": "A description for 'app.target.datasource.port'"
   },
   {
-    "name": "target.datasource.database",
+    "name": "app.target.datasource.database",
     "type": "java.lang.String",
-    "description": "A description for 'target.datasource.database'"
+    "description": "A description for 'app.target.datasource.database'"
   },
   {
-    "name": "target.datasource.username",
+    "name": "app.target.datasource.username",
     "type": "java.lang.String",
-    "description": "A description for 'target.datasource.username'"
+    "description": "A description for 'app.target.datasource.username'"
   },
   {
-    "name": "target.datasource.password",
+    "name": "app.target.datasource.password",
     "type": "java.lang.String",
-    "description": "A description for 'target.datasource.password'"
+    "description": "A description for 'app.target.datasource.password'"
   },
   {
-    "name": "exporter.type",
+    "name": "app.exporter.type",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.type'"
+    "description": "A description for 'app.exporter.type'"
   },
   {
-    "name": "exporter.db.datasource.type",
+    "name": "app.exporter.db.datasource.type",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.db.datasource.type'"
+    "description": "A description for 'app.exporter.db.datasource.type'"
   },
   {
-    "name": "exporter.db.datasource.host",
+    "name": "app.exporter.db.datasource.host",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.db.datasource.host'"
+    "description": "A description for 'app.exporter.db.datasource.host'"
   },
   {
-    "name": "exporter.db.datasource.port",
+    "name": "app.exporter.db.datasource.port",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.db.datasource.port'"
+    "description": "A description for 'app.exporter.db.datasource.port'"
   },
   {
-    "name": "exporter.db.datasource.database",
+    "name": "app.exporter.db.datasource.database",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.db.datasource.database'"
+    "description": "A description for 'app.exporter.db.datasource.database'"
   },
   {
-    "name": "exporter.db.datasource.username",
+    "name": "app.exporter.db.datasource.username",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.db.datasource.username'"
+    "description": "A description for 'app.exporter.db.datasource.username'"
   },
   {
-    "name": "exporter.txt.outfile",
+    "name": "app.exporter.db.datasource.password",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.txt.outfile'"
+    "description": "A description for 'app.exporter.db.datasource.password'"
   },
   {
-    "name": "exporter.xlsx.outfile",
+    "name": "app.exporter.txt.out",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.xlsx.outfile'"
+    "description": "A description for 'app.exporter.txt.out'"
   },
   {
-    "name": "exporter.db.datasource.password",
+    "name": "app.exporter.xlsx.out",
     "type": "java.lang.String",
-    "description": "A description for 'exporter.db.datasource.password'"
+    "description": "A description for 'app.exporter.xlsx.out'"
   }
 ]}

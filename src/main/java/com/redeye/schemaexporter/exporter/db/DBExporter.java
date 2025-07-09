@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.redeye.schemaexporter.domain.ColumnDto;
 import com.redeye.schemaexporter.domain.SequenceDto;
@@ -19,18 +18,12 @@ import lombok.extern.slf4j.Slf4j;
  * 
  * @author jmsohn
  */
-@Component
 @Slf4j
 public class DBExporter extends Exporter {
 	
 	/** 스키마 정보 저장 Mapper */
 	@Autowired
 	private ExportMapper mapper;
-
-	@Override
-	public void init() throws Exception {
-		// Do nothing
-	}
 
 	@Override
 	@SuppressWarnings("unchecked")

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import com.jutools.DBDriverType;
  * @author jmsohn
  */
 @Configuration
+@ConditionalOnProperty(name="app.exporter.type", havingValue="DB")
 @MapperScan(
 	basePackages = "com.redeye.schemaexporter.exporter.db",
 	sqlSessionFactoryRef = "exporterSqlSessionFactory"
@@ -29,27 +31,27 @@ import com.jutools.DBDriverType;
 public class DBExporterConfig {
 	
 	/** db type */
-	@Value("${exporter.db.datasource.type}")
+	@Value("${app.exporter.db.datasource.type}")
 	private DBDriverType type;
 	
 	/** host */
-	@Value("${exporter.db.datasource.host}")
+	@Value("${app.exporter.db.datasource.host}")
 	private String host;
 	
 	/** port */
-	@Value("${exporter.db.datasource.port}")
+	@Value("${app.exporter.db.datasource.port}")
 	private int port;
 
 	/** database */
-	@Value("${exporter.db.datasource.database}")
+	@Value("${app.exporter.db.datasource.database}")
 	private String database;
 	
 	/** 접속 UserName */
-	@Value("${exporter.db.datasource.username}")
+	@Value("${app.exporter.db.datasource.username}")
 	private String username;
 	
 	/** 접속 Password */
-	@Value("${exporter.db.datasource.password}")
+	@Value("${app.exporter.db.datasource.password}")
 	private String password;
 
 	
