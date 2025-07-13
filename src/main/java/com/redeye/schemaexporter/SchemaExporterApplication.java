@@ -1,5 +1,7 @@
 package com.redeye.schemaexporter;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.jutools.CronJob;
+import com.jutools.FileUtil;
 import com.redeye.schemaexporter.exporter.Exporter;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +31,10 @@ public class SchemaExporterApplication implements CommandLineRunner {
 	/** 크론 실행 모드일 경우의 실행 주기 */
 	@Value("${app.cron.schedule}")
 	private String cronSchedule;
+	
+	/** */
+	@Value("${app.stop.file}")
+	private File stopFile;
 	
 	/**
 	 * 출력 객체
@@ -60,7 +67,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 		if(this.runMode == RunMode.CRON) {
 
 			// 크론잡 실행
-			CronJob.builder()
+			CronJob job = CronJob.builder()
 				.cronExp(this.cronSchedule)
 				.job(new Runnable() {
 					@Override
@@ -72,7 +79,15 @@ public class SchemaExporterApplication implements CommandLineRunner {
 						}
 					}
 				})
-				.build().run();
+				.build();
+			
+			job.run();
+			
+			// stop 파일이 touch 될때까지 대기
+			FileUtil.waitForFileTouched(this.stopFile);
+			
+			// 크론잡 중단
+			job.stop();
 			
 		} else {
 			
