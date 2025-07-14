@@ -18,7 +18,7 @@
 	
 	<properties>
 		<java.version>17</java.version>
-		<deploy.target.dir>C:/apps/schemaexporter</deploy.target.dir>
+		<deploy.target.dir>C:/apps/SchemaExporter</deploy.target.dir>
 	</properties>
 	
 	<dependencies>
