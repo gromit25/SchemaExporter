@@ -66,7 +66,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 		
 		if(this.runMode == RunMode.CRON) {
 
-			// 크론잡 실행
+			// 크론잡 생성 및 실행
 			CronJob job = CronJob.builder()
 				.cronExp(this.cronSchedule)
 				.job(new Runnable() {
