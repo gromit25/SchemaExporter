@@ -1,4 +1,4 @@
-package com.redeye.schemaexporter.config;
+package com.redeye.schemaexporter.exporter.db;
 
 import javax.sql.DataSource;
 
@@ -16,20 +16,21 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.jutools.DBDriverType;
+import com.redeye.schemaexporter.exporter.Exporter;
 
-/**
- * 스키마 저장 데이터베이스 접속 설정 클래스
- * 
- * @author jmsohn
- */
 @Configuration
-@ConditionalOnProperty(name="app.exporter.type", havingValue="DB")
-@MapperScan(
+@ConditionalOnProperty
+(
+	value = "app.exporter.type",
+	havingValue = "DB"
+)
+@MapperScan
+(
 	basePackages = "com.redeye.schemaexporter.exporter.db",
 	sqlSessionFactoryRef = "exporterSqlSessionFactory"
 )
 public class DBExporterConfig {
-	
+
 	/** db type */
 	@Value("${app.exporter.db.datasource.type}")
 	private DBDriverType type;
@@ -54,6 +55,11 @@ public class DBExporterConfig {
 	@Value("${app.exporter.db.datasource.password}")
 	private String password;
 
+	
+	@Bean("exporter")
+	Exporter exporter() {
+		return new DBExporter();
+	}
 	
     @Bean(name = "exporterDataSource")
     DataSource dataSource() throws Exception {

@@ -1,4 +1,4 @@
-package com.redeye.schemaexporter.config;
+package com.redeye.schemaexporter.target;
 
 import javax.sql.DataSource;
 
