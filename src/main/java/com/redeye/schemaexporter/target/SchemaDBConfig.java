@@ -22,11 +22,12 @@ import com.jutools.DBDriverType;
  * @author jmsohn
  */
 @Configuration
-@MapperScan(
+@MapperScan
+(
 	basePackages = "com.redeye.schemaexporter.target",
 	sqlSessionFactoryRef = "targetSqlSessionFactory"
 )
-public class TargetDBConfig {
+public class SchemaDBConfig {
 	
     /** db type */
     @Value("${app.target.datasource.type}")
@@ -94,7 +95,8 @@ public class TargetDBConfig {
      */
     private String getMapperPath() throws Exception {
 
-    	return switch(this.type) {
+    	return
+    	switch(this.type) {
             case ORACLE -> "classpath:mapper/target/oracle/*.xml";
             case POSTGRESQL -> "classpath:mapper/target/postgresql/*.xml";
             case MYSQL -> "classpath:mapper/target/mysql/*.xml";
