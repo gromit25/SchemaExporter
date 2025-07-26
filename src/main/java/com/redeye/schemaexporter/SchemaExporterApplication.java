@@ -37,7 +37,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 	private File stopFile;
 	
 	/**
-	 * 출력 객체
+	 * 출력 객체<br>
 	 * SchemaExporterConfig.getExport 메소드에 의해 빈 컴포넌트 등록됨
 	 */
 	@Autowired
@@ -54,7 +54,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 	}
 	
 	/**
-	 * 스키마를 읽어 출력
+	 * 스키마를 읽어 출력함
 	 * 
 	 * @param args 명령행 인자
 	 */
