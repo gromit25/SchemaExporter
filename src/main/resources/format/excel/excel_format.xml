@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbook template="C:/workspace/GenDBSpec/src/main/resources/template.xlsx">
+<workbook template="C:/workspace/GenDBSpec/src/main/resources/format/excel/template.xlsx">
 
 	<!--  -->
 	<set name="prjName" value="ridertax"/>
