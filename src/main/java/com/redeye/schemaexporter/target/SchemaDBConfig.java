@@ -95,12 +95,15 @@ public class SchemaDBConfig {
      */
     private String getMapperPath() throws Exception {
 
-    	return
     	switch(this.type) {
-            case ORACLE -> "classpath:mapper/target/oracle/*.xml";
-            case POSTGRESQL -> "classpath:mapper/target/postgresql/*.xml";
-            case MYSQL -> "classpath:mapper/target/mysql/*.xml";
-            default -> throw new Exception("unexpected target db type:" + this.type);
-        };
+            case ORACLE:
+            	return "classpath:mapper/target/oracle/*.xml";
+            case POSTGRESQL:
+            	return "classpath:mapper/target/postgresql/*.xml";
+            case MYSQL:
+            	return "classpath:mapper/target/mysql/*.xml";
+            default:
+            	throw new Exception("unexpected target db type:" + this.type);
+        }
     }
 }
