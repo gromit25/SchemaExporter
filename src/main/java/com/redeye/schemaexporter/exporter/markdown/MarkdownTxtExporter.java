@@ -1,4 +1,4 @@
-package com.redeye.schemaexporter.exporter.txt;
+package com.redeye.schemaexporter.exporter.markdown;
 
 import java.io.File;
 import java.io.InputStream;

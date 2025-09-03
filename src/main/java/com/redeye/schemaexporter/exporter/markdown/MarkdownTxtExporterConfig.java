@@ -1,4 +1,4 @@
-package com.redeye.schemaexporter.exporter.txt;
+package com.redeye.schemaexporter.exporter.markdown;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +16,6 @@ public class MarkdownTxtExporterConfig {
 
 	@Bean("exporter")
 	Exporter exporter() {
-		return new TxtExporter();
+		return new MarkdownTxtExporter();
 	}
 }
