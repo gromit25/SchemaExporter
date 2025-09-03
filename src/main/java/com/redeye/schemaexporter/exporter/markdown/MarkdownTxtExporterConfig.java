@@ -10,9 +10,9 @@ import com.redeye.schemaexporter.exporter.Exporter;
 @ConditionalOnProperty
 (
 	value = "app.exporter.type",
-	havingValue = "TXT"
+	havingValue = "MARKDOWN"
 )
-public class TxtExporterConfig {
+public class MarkdownTxtExporterConfig {
 
 	@Bean("exporter")
 	Exporter exporter() {
