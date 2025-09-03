@@ -20,7 +20,7 @@ import jakarta.annotation.PostConstruct;
 public class XlsxExporter extends Exporter {
 
 	/** 포맷 파일 명 */
-	private static final String FORMAT_FILE = "excel_format.xml";
+	private static final String FORMAT_FILE = "format/excel/excel_format.xml";
 	
 	/** 출력 엑셀 파일 명 */
 	@Value("${app.exporter.xlsx.out}")
