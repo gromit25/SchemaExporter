@@ -13,12 +13,12 @@ import com.redeye.schemaexporter.exporter.Exporter;
 import jakarta.annotation.PostConstruct;
 
 /**
- * 텍스트 파일로 스키마를 툴력함
+ * 마크다운 텍스트 파일로 스키마를 툴력함
  * mermaid markdown의 erDiagram 형식
  * 
  * @author jmsohn
  */
-public class TxtExporter extends Exporter {
+public class MarkdownTxtExporter extends Exporter {
 	
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "markdown_format.xml";
