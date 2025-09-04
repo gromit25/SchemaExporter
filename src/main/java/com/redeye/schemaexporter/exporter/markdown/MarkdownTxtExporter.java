@@ -24,7 +24,7 @@ public class MarkdownTxtExporter extends Exporter {
 	private static final String FORMAT_FILE = "format/markdown/markdown_format.xml";
 	
 	/** 출력 엑셀 파일 명 */
-	@Value("${app.exporter.txt.out}")
+	@Value("${app.exporter.markdown.out}")
 	private String outFileName;
 	
 	/** 출력할 텍스트 파일 */
