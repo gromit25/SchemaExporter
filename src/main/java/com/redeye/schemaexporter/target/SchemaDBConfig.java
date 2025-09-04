@@ -30,27 +30,27 @@ import com.jutools.DBDriverType;
 public class SchemaDBConfig {
 	
     /** db type */
-    @Value("${app.target.datasource.type}")
+    @Value("${app.target.db.type}")
     private DBDriverType type;
 	
     /** host */
-    @Value("${app.target.datasource.host}")
+    @Value("${app.target.db.host}")
     private String host;
 	
     /** port */
-    @Value("${app.target.datasource.port}")
+    @Value("${app.target.db.port}")
     private int port;
 
     /** database */
-    @Value("${app.target.datasource.database}")
+    @Value("${app.target.db.database}")
     private String database;
 	
     /** 접속 UserName */
-    @Value("${app.target.datasource.username}")
+    @Value("${app.target.db.username}")
     private String username;
 	
     /** 접속 Password */
-    @Value("${app.target.datasource.password}")
+    @Value("${app.target.db.password}")
     private String password;
 	
     @Bean(name = "targetDataSource")
