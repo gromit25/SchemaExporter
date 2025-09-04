@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbook template="C:/workspace/GenDBSpec/src/main/resources/format/excel/template.xlsx">
+<workbook template="format/excel/template.xlsx">
 
-	<!--  -->
-	<set name="prjName" value="ridertax"/>
-	<set name="schemaName" value="ridertax"/>
+	<!-- 기본 정보 설정 -->
+	<set name="prjName" value=""/>
+	<set name="schemaName" value=""/>
 	<set name="deptName" value="Backend"/>
 	<set name="writer" value="손정모"/>
 
