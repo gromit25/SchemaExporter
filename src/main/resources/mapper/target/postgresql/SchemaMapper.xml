@@ -76,7 +76,7 @@
 	</select>
 	
 	<!-- 시퀀스 목록 조회 -->
-	<select id="selectSeq" resultType="com.redeye.redeye.domain.SequenceDto">
+	<select id="selectSeq" resultType="com.redeye.schemaexporter.domain.SequenceDto">
 		select
 			sequence_schema as schemaName
 			, sequence_name as sequenceName
