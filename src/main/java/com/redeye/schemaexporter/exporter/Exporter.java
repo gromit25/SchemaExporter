@@ -23,6 +23,14 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class Exporter {
+
+	/** 기관 코드 */
+	@Value("${app.organ.code}")
+	private String organCode;
+
+	/** 도메인 코드 */
+	@Value("${app.domain.code}")
+	private String domainCode;
 	
 	/** 추출할 스키마 명 */
 	@Value("${app.target.schema}")
@@ -62,6 +70,12 @@ public abstract class Exporter {
 		
 		// 스키마 정보
 		Map<String, Object> values = new HashMap<>();
+		
+		// 기관 코드 설정
+		values.put("organCode", this.organCode);
+		
+		// 도메인 코드 설정
+		values.put("domainCode", this.domainCode);
 		
 		// 현재 스키마명 설정
 		values.put("schemaName", this.schemaName);

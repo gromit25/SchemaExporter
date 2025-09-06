@@ -2,6 +2,11 @@
 <format>
 >{
 
+<!--기관/도메인 코드 및 스키마 명 출력 -->
+>"organCode": "${organCode}",
+>"domainCode": "${domainCode}",
+>"schemaName": "${schemaName}",
+
 <!-- 테이블 정보 출력 -->
 >"tableList": [
 <foreach element="table" list="tableList" separator=",">
