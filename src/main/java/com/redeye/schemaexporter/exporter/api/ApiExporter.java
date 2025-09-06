@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import com.jutools.FileUtil;
 import com.jutools.publish.Publisher;
 import com.jutools.publish.PublisherFactory;
 import com.jutools.publish.PublisherType;
@@ -37,7 +38,7 @@ public class ApiExporter extends Exporter {
 	protected void write(Map<String, Object> values) throws Exception {
 		
 	    // 출력 format input stream
-		InputStream formatInputStream = getClass().getClassLoader().getResourceAsStream(FORMAT_FILE);
+		InputStream formatInputStream = FileUtil.getInputStream(FORMAT_FILE);
 		
 		// JSON 출력 실행
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
