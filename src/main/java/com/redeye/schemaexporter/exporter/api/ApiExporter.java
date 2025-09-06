@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
+
 import com.jutools.publish.Publisher;
 import com.jutools.publish.PublisherFactory;
 import com.jutools.publish.PublisherType;
@@ -18,6 +21,12 @@ import lombok.extern.slf4j.Slf4j;
  * @author jmsohn
  */
 @Slf4j
+@Component("exporter")
+@ConditionalOnProperty
+(
+	value = "app.exporter.type",
+	havingValue = "API"
+)
 public class ApiExporter extends Exporter {
 	
 	/** 포맷 파일 명 */

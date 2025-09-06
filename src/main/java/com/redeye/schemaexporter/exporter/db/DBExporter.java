@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 import com.redeye.schemaexporter.domain.ColumnDto;
 import com.redeye.schemaexporter.domain.SequenceDto;
@@ -19,6 +21,12 @@ import lombok.extern.slf4j.Slf4j;
  * @author jmsohn
  */
 @Slf4j
+@Component("exporter")
+@ConditionalOnProperty
+(
+	value = "app.exporter.type",
+	havingValue = "DB"
+)
 public class DBExporter extends Exporter {
 	
 	/** 스키마 정보 저장 Mapper */

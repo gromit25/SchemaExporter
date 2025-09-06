@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 import com.jutools.PublishUtil;
 import com.jutools.StringUtil;
@@ -17,6 +19,12 @@ import jakarta.annotation.PostConstruct;
  * 
  * @author jmsohn
  */
+@Component("exporter")
+@ConditionalOnProperty
+(
+	value = "app.exporter.type",
+	havingValue = "XLSX"
+)
 public class XlsxExporter extends Exporter {
 
 	/** 포맷 파일 명 */

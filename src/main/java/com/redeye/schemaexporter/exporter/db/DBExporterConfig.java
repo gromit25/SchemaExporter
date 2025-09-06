@@ -16,7 +16,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.jutools.DBDriverType;
-import com.redeye.schemaexporter.exporter.Exporter;
 
 @Configuration
 @ConditionalOnProperty
@@ -55,11 +54,6 @@ public class DBExporterConfig {
 	@Value("${app.exporter.db.datasource.password}")
 	private String password;
 
-	
-	@Bean("exporter")
-	Exporter exporter() {
-		return new DBExporter();
-	}
 	
     @Bean(name = "exporterDataSource")
     DataSource dataSource() throws Exception {
