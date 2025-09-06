@@ -21,6 +21,7 @@
 				>"name": "${column.columnName}",
 				>"description": "${column.description}",
 				>"type": "${column.type}",
+				>"size": "${column.size}",
 				>"isPrimaryKey": "${column.isPrimaryKey}",
 				>"isUnique": "${column.isUnique}",
 				>"isNullable": "${column.isNullable}",
