@@ -29,38 +29,25 @@ import com.jutools.DBDriverType;
 )
 public class SchemaDBConfig {
 	
-    /** db type */
-    @Value("${app.target.db.type}")
-    private DBDriverType type;
-	
-    /** host */
-    @Value("${app.target.db.host}")
-    private String host;
-	
-    /** port */
-    @Value("${app.target.db.port}")
-    private int port;
+	/** db type */
+	@Value("${app.target.db.type}")
+	private DBDriverType type;
 
-    /** database */
-    @Value("${app.target.db.database}")
-    private String database;
-	
-    /** 접속 UserName */
-    @Value("${app.target.db.username}")
-    private String username;
-	
-    /** 접속 Password */
-    @Value("${app.target.db.password}")
-    private String password;
-	
-    @Bean(name = "targetDataSource")
-    DataSource dataSource() throws Exception {
+
+	@Bean(name = "targetDataSource")
+	DataSource dataSource(
+		@Value("${app.target.db.host}") String host,
+		@Value("${app.target.db.port}") int port,
+		@Value("${app.target.db.database}") String database,
+		@Value("${app.target.db.username}") String username,
+		@Value("${app.target.db.password}") String password
+    ) throws Exception {
 
         return DataSourceBuilder.create()
 	        .driverClassName(this.type.getDriver())
-	        .url(this.type.getUrl(this.host, this.port, this.database))
-	        .username(this.username)
-	        .password(this.password)
+	        .url(this.type.getUrl(host, port, database))
+	        .username(username)
+	        .password(password)
 			.build();
     }
 

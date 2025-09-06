@@ -33,45 +33,31 @@ public class DBExporterConfig {
 	/** db type */
 	@Value("${app.exporter.db.datasource.type}")
 	private DBDriverType type;
-	
-	/** host */
-	@Value("${app.exporter.db.datasource.host}")
-	private String host;
-	
-	/** port */
-	@Value("${app.exporter.db.datasource.port}")
-	private int port;
 
-	/** database */
-	@Value("${app.exporter.db.datasource.database}")
-	private String database;
-	
-	/** 접속 UserName */
-	@Value("${app.exporter.db.datasource.username}")
-	private String username;
-	
-	/** 접속 Password */
-	@Value("${app.exporter.db.datasource.password}")
-	private String password;
 
-	
-    @Bean(name = "exporterDataSource")
-    DataSource dataSource() throws Exception {
-    	
-        return DataSourceBuilder.create()
-	        .driverClassName(this.type.getDriver())
-	        .url(this.type.getUrl(this.host, this.port, this.database))
-	        .username(this.username)
-	        .password(this.password)
+	@Bean(name = "exporterDataSource")
+	DataSource dataSource(
+		@Value("${app.exporter.db.datasource.host}") String host,
+		@Value("${app.exporter.db.datasource.port}") int port,
+		@Value("${app.exporter.db.datasource.database}") String database,
+		@Value("${app.exporter.db.datasource.username}") String username,
+		@Value("${app.exporter.db.datasource.password}") String password
+	) throws Exception {
+
+		return DataSourceBuilder.create()
+			.driverClassName(this.type.getDriver())
+			.url(this.type.getUrl(host, port, database))
+			.username(username)
+			.password(password)
 			.build();
-    }
+	}
 
     @Bean(name = "exporterSqlSessionFactory")
     SqlSessionFactory sqlSessionFactory(@Qualifier("exporterDataSource") DataSource dataSource) throws Exception {
 
     	// Mapper 자원 로딩
         Resource[] resources = new PathMatchingResourcePatternResolver()
-                .getResources("classpath:mapper/exporter/*.xml");
+                .getResources("classpath:mapper/exporter/mysql/*.xml");
     	
         // Session Factory 생성 후 반환
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
