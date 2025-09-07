@@ -40,6 +40,7 @@ public abstract class Exporter {
 	@Autowired
 	private SchemaService schemaSvc;
 	
+	
 	/**
 	 * 스키마를 외부 저장소(DB, File 등)에 출력
 	 * 
@@ -49,10 +50,14 @@ public abstract class Exporter {
 	
 	/**
 	 * 스키마 정보를 출력함
+	 * 
+	 * @param baseTime 수집 기준 시간
 	 */
-	public void export() throws Exception {
+	public void export(long baseTime) throws Exception {
 		
 		Map<String, Object> values = this.getSchemaInfo();
+		values.put("baseTime", baseTime);
+		
 		this.write(values);
 	}
 	

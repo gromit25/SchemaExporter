@@ -73,7 +73,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 					@Override
 					public void run() {
 						try {
-							exporter.export();
+							exporter.export(System.currentTimeMillis());
 						} catch(Exception ex) {
 							log.error("exception occured.", ex);
 						}
@@ -92,7 +92,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 		} else {
 			
 			// 한번만 실행
-			this.exporter.export();
+			this.exporter.export(System.currentTimeMillis());
 		}
 	}
 }

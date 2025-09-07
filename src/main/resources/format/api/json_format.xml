@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <format>
 >{
+<!-- 수집 기준 시간 출력 -->
+>"baseTime": ${baseTime}
+
 <!-- 테이블 정보 출력 -->
 >"tableList": [
 <foreach element="table" list="tableList" separator=",">
