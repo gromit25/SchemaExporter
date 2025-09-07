@@ -47,7 +47,7 @@ public class ApiExporter extends Exporter {
 		publisher.publish(out, Charset.forName("UTF-8"), values);
 		
 		String schemaJSON = new String(out.toByteArray(), "UTF-8");
-		log.info("SCHEMA JSON: " + schemaJSON);
+		log.info("SCHEMA JSON: \n" + schemaJSON);
 		
 		// API 호출
 	}

@@ -2,7 +2,7 @@
 <format>
 >{
 <!-- 수집 기준 시간 출력 -->
->"baseTime": ${baseTime}
+>"baseTime": ${baseTime}, 
 
 <!-- 테이블 정보 출력 -->
 >"tableList": [

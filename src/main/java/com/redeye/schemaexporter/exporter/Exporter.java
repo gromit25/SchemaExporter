@@ -56,7 +56,7 @@ public abstract class Exporter {
 	public void export(long baseTime) throws Exception {
 		
 		Map<String, Object> values = this.getSchemaInfo();
-		values.put("baseTime", baseTime);
+		values.put("baseTime", Long.toString(baseTime));
 		
 		this.write(values);
 	}
