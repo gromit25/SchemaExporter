@@ -21,7 +21,7 @@
 				>"name": "${column.columnName}",
 				>"description": "${column.description}",
 				>"type": "${column.type}",
-				>"size": "${column.size}",
+				>"size": ${column.size},
 				>"isPrimaryKey": "${column.isPrimaryKey}",
 				>"isUnique": "${column.isUnique}",
 				>"isNullable": "${column.isNullable}",
@@ -40,9 +40,9 @@
 <foreach element="sequence" list="sequenceList" separator=",">
 	>{
 		>"name": "${sequence.sequenceName}",
-		>"startValue": "${sequence.startValue}",
-		>"maxValue": "${sequence.maxValue}",
-		>"increment": "${sequence.increment}",
+		>"startValue": ${sequence.startValue},
+		>"maxValue": ${sequence.maxValue},
+		>"increment": ${sequence.increment},
 		>"isCycle": "${sequence.isCycle}"
 	>}
 </foreach>
