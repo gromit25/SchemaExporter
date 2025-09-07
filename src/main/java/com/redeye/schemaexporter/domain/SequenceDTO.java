@@ -10,7 +10,7 @@ import lombok.Data;
  * @author jmsohn
  */
 @Data
-public class SequenceDto {
+public class SequenceDTO {
 	
 	/** 스키마 아이디 */
 	private int schemaId;

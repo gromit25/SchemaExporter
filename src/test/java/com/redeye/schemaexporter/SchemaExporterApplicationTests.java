@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.redeye.schemaexporter.domain.ColumnDto;
-import com.redeye.schemaexporter.domain.KeyColumnDto;
-import com.redeye.schemaexporter.domain.TableDto;
+import com.redeye.schemaexporter.domain.ColumnDTO;
+import com.redeye.schemaexporter.domain.KeyColumnDTO;
+import com.redeye.schemaexporter.domain.TableDTO;
 import com.redeye.schemaexporter.target.SchemaMapper;
 
 @SpringBootTest
@@ -20,7 +20,7 @@ class SchemaExporterApplicationTests {
 	@Test
 	void testSelectTables_1() {
 		
-		List<TableDto> tables = this.mapper.selectTables(null);
+		List<TableDTO> tables = this.mapper.selectTables(null);
 		
 		System.out.println("Table List");
 		System.out.println("--------------------------------");
@@ -34,7 +34,7 @@ class SchemaExporterApplicationTests {
 	@Test
 	void testSelectTables_2() {
 		
-		List<TableDto> tables = this.mapper.selectTables("rc_t");
+		List<TableDTO> tables = this.mapper.selectTables("rc_t");
 		
 		System.out.println("Table List");
 		System.out.println("--------------------------------");
@@ -51,7 +51,7 @@ class SchemaExporterApplicationTests {
 		
 		String schemaName = "";
 		String tableName = "rc_req_body_spec";
-		List<ColumnDto> columns = this.mapper.selectColumns(schemaName, tableName);
+		List<ColumnDTO> columns = this.mapper.selectColumns(schemaName, tableName);
 		
 		System.out.println("Column List in " + tableName);
 		System.out.println("--------------------------------");
@@ -67,7 +67,7 @@ class SchemaExporterApplicationTests {
 		
 		String schemaName = "";
 		String tableName = "rc_req_body_spec";
-		List<KeyColumnDto> columns = this.mapper.selectKeyColumns(schemaName, tableName);
+		List<KeyColumnDTO> columns = this.mapper.selectKeyColumns(schemaName, tableName);
 		
 		System.out.println("Key Column List in " + tableName);
 		System.out.println("--------------------------------");

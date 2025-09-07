@@ -4,7 +4,7 @@
 <mapper namespace="com.redeye.schemaexporter.target.SchemaMapper">
 
 	<!-- 테이블 정보 추출 -->
-	<select id="selectTables" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.TableDto">
+	<select id="selectTables" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.TableDTO">
 		SELECT
 			table_name AS "tableName"
 			, table_comment AS "description"
@@ -15,7 +15,7 @@
 	</select>
 	
 	<!-- 특정 테이블의 컬럼 정보 추출 -->
-	<select id="selectColumns" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.ColumnDto">
+	<select id="selectColumns" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.ColumnDTO">
 		SELECT 
 		    cols.table_name AS "tableName"
 		    , cols.column_name AS "columnName"
@@ -40,7 +40,7 @@
 	</select>
 	
 	<!-- 특정 테이블의 키 정보 추출 -->
-	<select id="selectKeyColumns" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.KeyColumnDto">
+	<select id="selectKeyColumns" parameterType="java.lang.String" resultType="com.redeye.schemaexporter.domain.KeyColumnDTO">
 		SELECT 
 		    c.table_name AS "tableName"
 		    , c.column_name AS "columnName"
@@ -70,7 +70,7 @@
 	</select>
 	
 	<!-- 시퀀스 목록 조회 : MySQL은 AUTO_INCREMENT를 사용 -->
-	<select id="selectSeq" resultType="com.redeye.schemaexporter.domain.SequenceDto">
+	<select id="selectSeq" resultType="com.redeye.schemaexporter.domain.SequenceDTO">
 		SELECT
 		    '' AS "sequenceName"
 		    , 0 AS "startValue"
@@ -81,7 +81,7 @@
 	</select>
 	
 	<!-- 뷰 목록 조회 -->
-	<resultMap id="ViewMap" type="com.redeye.schemaexporter.domain.ViewDto">
+	<resultMap id="ViewMap" type="com.redeye.schemaexporter.domain.ViewDTO">
 		<result property="viewName" column="table_name"/>
 		<result property="query" column="view_definition" typeHandler="com.redeye.schemaexporter.common.handler.ViewSqlTypeHandler"/>
 	</resultMap>

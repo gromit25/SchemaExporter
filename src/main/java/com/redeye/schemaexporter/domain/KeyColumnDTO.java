@@ -8,7 +8,7 @@ import lombok.Data;
  * @author jmsohn
  */
 @Data
-public class KeyColumnDto {
+public class KeyColumnDTO {
 	
 	/** 테이블 명 */
 	private String tableName;

@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.redeye.schemaexporter.domain.ColumnDto;
-import com.redeye.schemaexporter.domain.SequenceDto;
-import com.redeye.schemaexporter.domain.TableDto;
-import com.redeye.schemaexporter.domain.ViewDto;
+import com.redeye.schemaexporter.domain.ColumnDTO;
+import com.redeye.schemaexporter.domain.SequenceDTO;
+import com.redeye.schemaexporter.domain.TableDTO;
+import com.redeye.schemaexporter.domain.ViewDTO;
 import com.redeye.schemaexporter.exporter.Exporter;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,12 +41,12 @@ public class DBExporter extends Exporter {
 		String schemaName = (String)values.get("schemaName");
 		
 		// 테이블 정보 저장
-		List<TableDto> tableList = (List<TableDto>)values.get("tableList");
+		List<TableDTO> tableList = (List<TableDTO>)values.get("tableList");
 		this.mapper.upsertTableList(schemaName, tableList);
 		log.info("table list saved sucessfully.");
 		
 		// 컬럼 정보 저장
-		Map<String, List<ColumnDto>> tableColumnMap = (Map<String, List<ColumnDto>>)values.get("tableList");
+		Map<String, List<ColumnDTO>> tableColumnMap = (Map<String, List<ColumnDTO>>)values.get("tableList");
 		tableColumnMap.forEach(
 			(tableName, columnList) -> {
 				this.mapper.upsertColumnList(schemaName, columnList);
@@ -55,12 +55,12 @@ public class DBExporter extends Exporter {
 		log.info("column list saved sucessfully.");
 		
 		// 시퀀스 정보 저장
-		List<SequenceDto> sequenceList = (List<SequenceDto>)values.get("sequenceList");
+		List<SequenceDTO> sequenceList = (List<SequenceDTO>)values.get("sequenceList");
 		this.mapper.upsertSequenceList(schemaName, sequenceList);
 		log.info("sequence list saved sucessfully.");
 		
 		// 뷰 정보 저장
-		List<ViewDto> viewList = (List<ViewDto>)values.get("viewList");
+		List<ViewDTO> viewList = (List<ViewDTO>)values.get("viewList");
 		this.mapper.upsertViewList(schemaName, viewList);
 		log.info("view list saved sucessfully.");
 		

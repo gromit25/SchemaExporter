@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.jutools.DateUtil;
 import com.jutools.StringUtil;
-import com.redeye.schemaexporter.domain.ColumnDto;
-import com.redeye.schemaexporter.domain.TableDto;
+import com.redeye.schemaexporter.domain.ColumnDTO;
+import com.redeye.schemaexporter.domain.TableDTO;
 import com.redeye.schemaexporter.target.SchemaService;
 import com.redeye.schemaexporter.target.SchemaUtil;
 
@@ -90,12 +90,12 @@ public abstract class Exporter {
 		values.put("today", today);
 		
 		// 테이블 정보 목록 획득 및 설정
-		List<TableDto> tableList = this.schemaSvc.getTableList(this.schemaName);
+		List<TableDTO> tableList = this.schemaSvc.getTableList(this.schemaName);
 		values.put("tableList", tableList);
 		log.info("table list loaded successfully.");
 		
 		// 테이블별 컬럼 정보 목록 획득 및 설정
-		Map<String, List<ColumnDto>> tableColumnMap = this.schemaSvc.getColumnMap(this.schemaName, tableList);
+		Map<String, List<ColumnDTO>> tableColumnMap = this.schemaSvc.getColumnMap(this.schemaName, tableList);
 		values.put("tableColumnMap", tableColumnMap);
 		log.info("table-column map loaded successfully.");
 		

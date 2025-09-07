@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.redeye.schemaexporter.domain.ColumnDto;
-import com.redeye.schemaexporter.domain.KeyColumnDto;
-import com.redeye.schemaexporter.domain.SequenceDto;
-import com.redeye.schemaexporter.domain.TableDto;
-import com.redeye.schemaexporter.domain.ViewDto;
+import com.redeye.schemaexporter.domain.ColumnDTO;
+import com.redeye.schemaexporter.domain.KeyColumnDTO;
+import com.redeye.schemaexporter.domain.SequenceDTO;
+import com.redeye.schemaexporter.domain.TableDTO;
+import com.redeye.schemaexporter.domain.ViewDTO;
 
 
 /**
@@ -26,7 +26,7 @@ public interface SchemaMapper {
 	 * @param schemaName 스키마 명
 	 * @return 테이블 목록
 	 */
-	public List<TableDto> selectTables(@Param("schemaName") String schemaName);
+	public List<TableDTO> selectTables(@Param("schemaName") String schemaName);
 	
 	/**
 	 * 특정 테이블의 컬럼 목록 반환
@@ -35,7 +35,7 @@ public interface SchemaMapper {
 	 * @param tableName 조회할 테이블 명
 	 * @return 컬럼 목록
 	 */
-	public List<ColumnDto> selectColumns(
+	public List<ColumnDTO> selectColumns(
 		@Param("schemaName") String schemaName,
 		@Param("tableName") String tableName
 	);
@@ -47,7 +47,7 @@ public interface SchemaMapper {
 	 * @param tableName 조회할 테이블 명
 	 * @return 키 컬럼 목록
 	 */
-	public List<KeyColumnDto> selectKeyColumns(
+	public List<KeyColumnDTO> selectKeyColumns(
 		@Param("schemaName") String schemaName,
 		@Param("tableName") String tableName
 	);
@@ -58,7 +58,7 @@ public interface SchemaMapper {
 	 * @param schemaName 스키마 명
 	 * @return 시퀀스 목록
 	 */
-	public List<SequenceDto> selectSeq(@Param("schemaName") String schemaName);
+	public List<SequenceDTO> selectSeq(@Param("schemaName") String schemaName);
 	
 	/**
 	 * 뷰 목록 반환
@@ -66,5 +66,5 @@ public interface SchemaMapper {
 	 * @param schemaName 스키마 명
 	 * @return 뷰 목록
 	 */
-	public List<ViewDto> selectView(@Param("schemaName") String schemaName);
+	public List<ViewDTO> selectView(@Param("schemaName") String schemaName);
 }

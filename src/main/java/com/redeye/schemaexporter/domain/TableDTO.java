@@ -3,19 +3,19 @@ package com.redeye.schemaexporter.domain;
 import lombok.Data;
 
 /**
- * 뷰 DTO
+ * 테이블 정보 DTO
  * 
  * @author jmsohn
  */
 @Data
-public class ViewDto {
+public class TableDTO {
 
 	/** 스키마 아이디 */
 	private int schemaId;
 	
-	/** 뷰 명 */
-	private String viewName;
+	/** 테이블 명 */
+	private String tableName;
 	
-	/** 뷰 쿼리 문자열 */
-	private String query;
+	/** 테이블 주석 */
+	private String description;
 }
