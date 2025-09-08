@@ -1,4 +1,4 @@
-package com.redeye.schemaexporter.exporter.api;
+package com.redeye.schemaexporter.exporter.restapi;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -26,9 +26,9 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnProperty
 (
 	value = "app.exporter.type",
-	havingValue = "API"
+	havingValue = "RESTAPI"
 )
-public class ApiExporter extends Exporter {
+public class RestApiExporter extends Exporter {
 	
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "format/api/json_format.xml";
