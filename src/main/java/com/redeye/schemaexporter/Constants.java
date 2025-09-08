@@ -13,6 +13,6 @@ public class Constants {
 	/** 도메인 코드 */
 	public static final String DOMAIN_CODE = "domainCode";
 	
-	/** 호스트 명 */
+	/** 스키마 명 */
 	public static final String SCHEMA_NAME = "schemaName";
 }
