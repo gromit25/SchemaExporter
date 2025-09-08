@@ -33,6 +33,10 @@ public class RestApiExporter extends Exporter {
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "format/api/json_format.xml";
 
+	/** */
+	@Autorwired
+	private WebClient webClient;
+
 
 	@Override
 	protected void write(Map<String, Object> values) throws Exception {
