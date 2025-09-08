@@ -83,5 +83,7 @@ public class RestAPIExporter extends Exporter {
 			.retrieve()
 			.bodyToMono(String.class)
 			.block();
+		
+		log.info("RESULT: \n" + result);
 	}
 }
