@@ -40,6 +40,24 @@ public class RestAPIExporter extends Exporter {
 
 	@Override
 	protected void write(Map<String, Object> values) throws Exception {
+
+		//
+		if(values.containsKey("") == false) {
+			throw new IllegalArgumentException("");
+		}
+
+		if(values.containsKey("") == false) {
+			throw new IllegalArgumentException("");
+		}
+
+		if(values.containsKey("") == false) {
+			throw new IllegalArgumentException("");
+		}
+
+		//
+		String organCode = values.get("").toString();
+		String domainCode = values.get("").toString();
+		String schemaName = values.get("").toString();
 		
 	    // 출력 format input stream
 		InputStream formatInputStream = FileUtil.getInputStream(FORMAT_FILE);
@@ -54,5 +72,12 @@ public class RestAPIExporter extends Exporter {
 		log.info("SCHEMA JSON: \n" + schemaJSON);
 		
 		// API 호출
+		String result = this.webClient.post()
+			.uri(String.format("/api/schema/%s/%s/%s", organCode, domainCode, schemaName))
+			.header("Content-Type", "application/json")
+			.bodyValue(schemaJSON)
+			.retrieve()
+			.bodyToMono(String.class)
+			.block();
 	}
 }
