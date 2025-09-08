@@ -5,14 +5,18 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.jutools.FileUtil;
 import com.jutools.publish.Publisher;
 import com.jutools.publish.PublisherFactory;
 import com.jutools.publish.PublisherType;
 import com.redeye.schemaexporter.exporter.Exporter;
+
+import static com.redeye.schemaexporter.Constants.*;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,30 +38,30 @@ public class RestAPIExporter extends Exporter {
 	private static final String FORMAT_FILE = "format/api/json_format.xml";
 
 	/** */
-	@Autorwired
+	@Autowired
 	private WebClient webClient;
 
 
 	@Override
 	protected void write(Map<String, Object> values) throws Exception {
 
-		//
-		if(values.containsKey("") == false) {
-			throw new IllegalArgumentException("");
+		// 입력 데이터 확인
+		if(values.containsKey(ORGAN_CODE) == false) {
+			throw new IllegalArgumentException(ORGAN_CODE + " is not found.");
 		}
 
-		if(values.containsKey("") == false) {
-			throw new IllegalArgumentException("");
+		if(values.containsKey(DOMAIN_CODE) == false) {
+			throw new IllegalArgumentException(DOMAIN_CODE + " is not found.");
 		}
 
-		if(values.containsKey("") == false) {
-			throw new IllegalArgumentException("");
+		if(values.containsKey(SCHEMA_NAME) == false) {
+			throw new IllegalArgumentException(SCHEMA_NAME + " is not found.");
 		}
 
-		//
-		String organCode = values.get("").toString();
-		String domainCode = values.get("").toString();
-		String schemaName = values.get("").toString();
+		// 기관 코드/도메인 코드/스키마 명 설정
+		String organCode = values.get(ORGAN_CODE).toString();
+		String domainCode = values.get(DOMAIN_CODE).toString();
+		String schemaName = values.get(SCHEMA_NAME).toString();
 		
 	    // 출력 format input stream
 		InputStream formatInputStream = FileUtil.getInputStream(FORMAT_FILE);
