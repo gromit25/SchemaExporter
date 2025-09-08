@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 	value = "app.exporter.type",
 	havingValue = "RESTAPI"
 )
-public class RestApiExporter extends Exporter {
+public class RestAPIExporter extends Exporter {
 	
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "format/api/json_format.xml";
