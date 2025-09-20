@@ -1,6 +1,9 @@
 package com.redeye.schemaexporter.exporter.restapi;
 
-import java.io.ByteArrayOutputStream;
+import static com.redeye.schemaexporter.Constants.DOMAIN_CODE;
+import static com.redeye.schemaexporter.Constants.ORGAN_CODE;
+import static com.redeye.schemaexporter.Constants.SCHEMA_NAME;
+
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -16,8 +19,7 @@ import com.jutools.publish.PublisherFactory;
 import com.jutools.publish.PublisherType;
 import com.redeye.schemaexporter.exporter.Exporter;
 
-import static com.redeye.schemaexporter.Constants.*;
-
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -37,10 +39,25 @@ public class RestAPIExporter extends Exporter {
 	/** 포맷 파일 명 */
 	private static final String FORMAT_FILE = "format/api/json_format.xml";
 
-	/** */
+	/** API 클라이언트 */
 	@Autowired
 	private WebClient webClient;
-
+	
+	/** API 전송 데이터를 생성하는 publisher 객체 */
+	private Publisher apiPublisher;
+	
+	/**
+	 * 초기화
+	 */
+	@PostConstruct
+	public void init() throws Exception {
+		
+	    // 출력 format input stream
+		InputStream formatInputStream = FileUtil.getInputStream(FORMAT_FILE);
+		
+		// 출력 publisher 객체 생성
+		this.apiPublisher = PublisherFactory.create(PublisherType.TEXT_FILE, formatInputStream);
+	}
 
 	@Override
 	protected void write(Map<String, Object> values) throws Exception {
@@ -63,16 +80,9 @@ public class RestAPIExporter extends Exporter {
 		String domainCode = values.get(DOMAIN_CODE).toString();
 		String schemaName = values.get(SCHEMA_NAME).toString();
 		
-	    // 출력 format input stream
-		InputStream formatInputStream = FileUtil.getInputStream(FORMAT_FILE);
-		
 		// JSON 출력 실행
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		String schemaJSON = this.apiPublisher.publish(Charset.forName("UTF-8"), values);
 		
-		Publisher publisher = PublisherFactory.create(PublisherType.TEXT_FILE, formatInputStream);
-		publisher.publish(out, Charset.forName("UTF-8"), values);
-		
-		String schemaJSON = new String(out.toByteArray(), "UTF-8");
 		log.info("SCHEMA JSON: \n" + schemaJSON);
 		
 		// API 호출
