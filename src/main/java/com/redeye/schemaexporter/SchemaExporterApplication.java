@@ -81,7 +81,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 				})
 				.build();
 			
-			job.run();
+			job.start();
 			
 			// stop 파일이 touch 될때까지 대기
 			FileUtil.waitForFileTouched(this.stopFile);
