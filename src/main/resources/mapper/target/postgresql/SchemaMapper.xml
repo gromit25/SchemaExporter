@@ -63,13 +63,13 @@
 		    	ON con.conrelid = c.oid
 		    	AND (a.attnum = any(con.conkey))
 			LEFT OUTER JOIN pg_class rc
-				on con.confrelid = rc.oid
+				ON con.confrelid = rc.oid
 			LEFT OUTER JOIN pg_attribute ra
 				ON ra.attrelid = rc.oid
 				AND ra.attnum = any(con.confkey)
 		WHERE
 		    c.relname = #{tableName}
-		    AND a.attnum > 0
+		    AND a.attnum <![CDATA[>]]> 0
 		    AND NOT a.attisdropped
 	</select>
 	
