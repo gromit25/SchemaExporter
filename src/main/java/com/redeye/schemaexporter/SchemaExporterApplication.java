@@ -32,7 +32,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 	@Value("${app.cron.schedule}")
 	private String cronSchedule;
 	
-	/** */
+	/** 크론 중단 파일 - 이 파일이 touch 되면 시스템 중지 */
 	@Value("${app.stop.file}")
 	private File stopFile;
 	
