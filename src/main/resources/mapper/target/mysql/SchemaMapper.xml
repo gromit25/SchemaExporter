@@ -69,7 +69,7 @@
 		    c.table_name, c.ordinal_position
 	</select>
 	
-	<!-- 시퀀스 목록 조회 : MySQL은 AUTO_INCREMENT를 사용 -->
+	<!-- 시퀀스 목록 조회 : MySQL은 AUTO_INCREMENT를 사용하기 떄문에 시퀀스가 없음 -->
 	<select id="selectSeq" resultType="com.redeye.schemaexporter.domain.SequenceDTO">
 		SELECT
 		    '' AS "sequenceName"
