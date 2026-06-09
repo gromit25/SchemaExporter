@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @SpringBootApplication
 public class SchemaExporterApplication implements CommandLineRunner {
+	
 
 	/** 실행 모드 */
 	@Value("${app.run-mode}")
@@ -35,6 +36,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 	/** 크론 중단 파일 - 이 파일이 touch 되면 시스템 중지 */
 	@Value("${app.stop.file}")
 	private File stopFile;
+	
 	
 	/**
 	 * 출력 객체<br>
