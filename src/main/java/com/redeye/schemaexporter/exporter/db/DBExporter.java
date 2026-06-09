@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.redeye.schemaexporter.domain.ColumnDTO;
-import com.redeye.schemaexporter.domain.SequenceDTO;
-import com.redeye.schemaexporter.domain.TableDTO;
-import com.redeye.schemaexporter.domain.ViewDTO;
+import com.redeye.schemaexporter.entity.ColumnDTO;
+import com.redeye.schemaexporter.entity.SequenceDTO;
+import com.redeye.schemaexporter.entity.TableDTO;
+import com.redeye.schemaexporter.entity.ViewDTO;
 import com.redeye.schemaexporter.exporter.Exporter;
 
 import lombok.extern.slf4j.Slf4j;
