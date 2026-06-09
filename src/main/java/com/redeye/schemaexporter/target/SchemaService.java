@@ -22,9 +22,11 @@ import com.redeye.schemaexporter.domain.ViewDTO;
 @Service
 public class SchemaService {
 	
+	
 	/** 스키마 정보 추출 Mapper */
 	@Autowired
 	private SchemaMapper mapper;
+	
 	
 	/**
 	 * DB 스키마 정보 반환
