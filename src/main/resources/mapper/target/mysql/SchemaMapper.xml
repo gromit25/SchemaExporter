@@ -28,10 +28,9 @@
 		    , cols.column_comment AS "description"
 		FROM 
 		    information_schema.columns cols
-		JOIN 
-		    information_schema.tables tbls
-		    ON cols.table_schema = tbls.table_schema
-		    AND cols.table_name = tbls.table_name
+			JOIN information_schema.tables tbls
+		    	ON cols.table_schema = tbls.table_schema
+		    	AND cols.table_name = tbls.table_name
 		WHERE 
 		    cols.table_schema = #{schemaName}
 		    AND cols.table_name = #{tableName}
@@ -54,14 +53,14 @@
 		    , kcu.referenced_column_name AS "refColumnName"
 		FROM 
 		    information_schema.columns c
-		LEFT JOIN information_schema.key_column_usage kcu 
-		    ON c.table_schema = kcu.table_schema 
-		    AND c.table_name = kcu.table_name 
-		    AND c.column_name = kcu.column_name
-		JOIN information_schema.table_constraints tc 
-		    ON kcu.constraint_name = tc.constraint_name 
-		    AND kcu.table_name = tc.table_name 
-		    AND kcu.table_schema = tc.table_schema
+			LEFT JOIN information_schema.key_column_usage kcu 
+				ON c.table_schema = kcu.table_schema 
+				AND c.table_name = kcu.table_name 
+				AND c.column_name = kcu.column_name
+			JOIN information_schema.table_constraints tc 
+				ON kcu.constraint_name = tc.constraint_name 
+				AND kcu.table_name = tc.table_name 
+				AND kcu.table_schema = tc.table_schema
 		WHERE 
 		    c.table_schema = #{schemaName}
 		    AND c.table_name = #{tableName}
