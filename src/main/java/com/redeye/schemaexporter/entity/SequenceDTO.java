@@ -1,4 +1,4 @@
-package com.redeye.schemaexporter.domain;
+package com.redeye.schemaexporter.entity;
 
 import java.math.BigInteger;
 
