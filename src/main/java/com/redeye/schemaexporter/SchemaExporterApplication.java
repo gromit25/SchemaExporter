@@ -62,7 +62,7 @@ public class SchemaExporterApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		log.info("start schema exporter.");
-		log.info("run-mode : " + this.runMode);
+		log.info("run-mode: " + this.runMode);
 		
 		if(this.runMode == RunMode.CRON) {
 
