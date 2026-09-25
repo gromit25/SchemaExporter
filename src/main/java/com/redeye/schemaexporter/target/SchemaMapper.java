@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.redeye.schemaexporter.domain.ColumnDTO;
-import com.redeye.schemaexporter.domain.KeyColumnDTO;
-import com.redeye.schemaexporter.domain.SequenceDTO;
-import com.redeye.schemaexporter.domain.TableDTO;
-import com.redeye.schemaexporter.domain.ViewDTO;
+import com.redeye.schemaexporter.entity.ColumnDTO;
+import com.redeye.schemaexporter.entity.KeyColumnDTO;
+import com.redeye.schemaexporter.entity.SequenceDTO;
+import com.redeye.schemaexporter.entity.TableDTO;
+import com.redeye.schemaexporter.entity.ViewDTO;
 
 
 /**

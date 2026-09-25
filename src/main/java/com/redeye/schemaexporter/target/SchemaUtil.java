@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jutools.TypeUtil;
-import com.redeye.schemaexporter.domain.ColumnDTO;
+import com.redeye.schemaexporter.entity.ColumnDTO;
 
 /**
  * 유틸리티 클래스
