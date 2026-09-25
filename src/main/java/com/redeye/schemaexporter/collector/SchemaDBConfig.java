@@ -84,11 +84,11 @@ public class SchemaDBConfig {
 
     	switch(this.type) {
             case ORACLE:
-            	return "classpath:mapper/target/oracle/*.xml";
+            	return "classpath:mapper/collector/oracle/*.xml";
             case POSTGRESQL:
-            	return "classpath:mapper/target/postgresql/*.xml";
+            	return "classpath:mapper/collector/postgresql/*.xml";
             case MYSQL:
-            	return "classpath:mapper/target/mysql/*.xml";
+            	return "classpath:mapper/collector/mysql/*.xml";
             default:
             	throw new Exception("unexpected target db type:" + this.type);
         }
