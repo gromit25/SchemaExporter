@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.jutools.DateUtil;
 import com.jutools.StringUtil;
+import com.redeye.schemaexporter.collector.SchemaService;
+import com.redeye.schemaexporter.collector.SchemaUtil;
 import com.redeye.schemaexporter.entity.ColumnDTO;
 import com.redeye.schemaexporter.entity.TableDTO;
-import com.redeye.schemaexporter.target.SchemaService;
-import com.redeye.schemaexporter.target.SchemaUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
