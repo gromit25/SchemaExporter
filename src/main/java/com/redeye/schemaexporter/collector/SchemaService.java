@@ -3,8 +3,10 @@ package com.redeye.schemaexporter.collector;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.jutools.DateUtil;
@@ -14,19 +16,37 @@ import com.redeye.schemaexporter.entity.SequenceDTO;
 import com.redeye.schemaexporter.entity.TableDTO;
 import com.redeye.schemaexporter.entity.ViewDTO;
 
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+
 /**
  * 스키마 정보 추출 서비스
  * 
  * @author jmsohn
  */
 @Service
+@RequiredArgsConstructor
 public class SchemaService {
 	
 	
 	/** 스키마 정보 추출 Mapper */
-	@Autowired
-	private SchemaMapper mapper;
+	private final SchemaMapper mapper;
+
+	/** 테이블 필터 패턴 문자열 */
+	@Value("${app.target.table.pattern}")
+	private String tableFilterPatternStr;
 	
+	/** 테이블 필터 패턴 객체 */
+	private Pattern tableFilterPattern;
+	
+
+	/**
+	 * 객체 생성 후 초기화 수행
+	 */
+	@PostConstruct
+	public void init() {
+		this.tableFilterPattern = Pattern.compile(this.tableFilterPatternStr);
+	}
 	
 	/**
 	 * DB 스키마 정보 반환
@@ -70,7 +90,16 @@ public class SchemaService {
 	 * @return 테이블 목록
 	 */
 	public List<TableDTO> getTableList(String schemaName) throws Exception {
-		return this.mapper.selectTables(schemaName);
+		
+		return this.mapper
+			.selectTables(schemaName)
+			.stream()
+			.filter(tableInfo -> {
+				return tableFilterPattern
+					.matcher(tableInfo.getTableName())
+					.matches();
+			})
+			.collect(Collectors.toList());
 	}
 
 	/**
@@ -121,13 +150,13 @@ public class SchemaService {
 			// 컬럼별 키 정보 추가
 			keyColumns.forEach(keyColumn -> {
 				
-				//
+				// 현재 키 정보 획득 및 기존 컬럼 목록에 있는지 확인
 				String key = keyColumn.getKey();
 				if(columnMap.containsKey(key) == false) {
 					return;
 				}
 				
-				//
+				// 키 컬럼 객체 획득
 				ColumnDTO column = columnMap.get(key);
 				
 				// 키 타입에 따른 처리
