@@ -24,7 +24,7 @@ import com.jutools.DBDriverType;
 @Configuration
 @MapperScan
 (
-	basePackages = "com.redeye.schemaexporter.target",
+	basePackages = "com.redeye.schemaexporter.collector",
 	sqlSessionFactoryRef = "targetSqlSessionFactory"
 )
 public class SchemaDBConfig {
